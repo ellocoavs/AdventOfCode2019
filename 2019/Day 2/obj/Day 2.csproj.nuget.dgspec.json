@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitProjects\\AdventOfCode\\2019\\Day 2\\Day 2.csproj": {}
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 2\\Day 2.csproj": {}
   },
   "projects": {
-    "C:\\GitProjects\\AdventOfCode\\2019\\Day 2\\Day 2.csproj": {
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 2\\Day 2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day 2\\Day 2.csproj",
+        "projectUniqueName": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 2\\Day 2.csproj",
         "projectName": "Day 2",
-        "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 2\\Day 2.csproj",
-        "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
-        "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 2\\obj\\",
+        "projectPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 2\\Day 2.csproj",
+        "packagesPath": "C:\\Users\\snappet\\.nuget\\packages\\",
+        "outputPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 2\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\snappet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {
@@ -50,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
