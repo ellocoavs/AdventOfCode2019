@@ -10,28 +10,46 @@ namespace Day3
             
             var text = File.ReadAllLines("input.txt");
             
-            string[] split = text[0].Split(",");
-            int[] wire1= new int[1000] ;
-            int counter = 0;
-            foreach (string x in split)
-            {
-                wire1[counter] =Int32.Parse(x);
-                counter++;
-            }
-
-            split = text[1].Split(",");
-            int[] wire2= new int[1000] ;
-            counter = 0;
-            foreach (string x in split)
-            {
-                wire2[counter] =Int32.Parse(x);
-                counter++;
-            }
+            string[] wire1 = text[0].Split(",");
+            string[] wire2 = text[1].Split(",");
 
             int[,] grid = new int[1000,1000];
-            //start coordinates 500,500?
-            
 
+            //start coordinates 500,500?
+            int startx =500;
+            int starty = 500;
+
+            //keep track of current position separately, reset after finishing a wire
+            int currentx = startx;
+            int currenty = starty;
+
+            //process wire1
+            foreach (string path in wire1)
+            {
+                Process(currentx,currenty,path,grid);
+            }
+
+            //process wire2
+            //Reset to starting position
+            currentx = startx;
+            currenty = starty;
+
+        }
+        static void Process(int currentx, int currenty, string path, int[,] grid)
+        {
+            if (path[0] == 'U'){
+
+            }
+            if (path[0] == 'D'){
+                
+            }
+            if (path[0] == 'L'){
+                
+            }
+            if (path[0] == 'R'){
+                
+            }
+            else {Console.WriteLine("Invalid direction detected: " + path);}
         }
     }
 }
