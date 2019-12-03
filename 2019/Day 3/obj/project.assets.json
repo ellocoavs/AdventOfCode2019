@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day3\\Day3.csproj",
+      "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day 3\\Day3.csproj",
       "projectName": "Day3",
-      "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day3\\Day3.csproj",
+      "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 3\\Day3.csproj",
       "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
-      "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day3\\obj\\",
+      "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config"

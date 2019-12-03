@@ -16,12 +16,16 @@ namespace Day3
             string[] wire1 = text[0].Split(",");
             string[] wire2 = text[1].Split(",");
 
-            byte[,] grid = new byte[50000,50000];
+            int gridsize = 30000;
+            byte[,] grid = new byte[gridsize,gridsize];
 
             //start coordinates 500,500?
-            int startx =25000;
-            int starty = 25000;
+            int startx = gridsize/3;
+            int starty = gridsize/3;
 
+            int[,] steps1 = new int[gridsize,gridsize];
+            int[,] steps2 = new int[gridsize,gridsize];
+            
             //TEST DATA
             // byte[,]grid = new byte[1000,1000];
             // int startx= 500;
@@ -35,13 +39,13 @@ namespace Day3
             int currentx = startx;
             int currenty = starty;
 
-            grid[startx,starty] = 2; //both wires start and therefore touch the starting position
-
+            grid[startx,starty] = (2); //both wires start and therefore touch the starting position
+            int stepping = 0;
             //process wire1
             Console.WriteLine("Processing Wire 1");
             foreach (string path in wire1)
             {
-                Process(ref currentx,ref currenty,path,grid);
+                Process(ref currentx,ref currenty,path,grid, steps1, ref stepping);
             }
 
             for (int col =0; col < grid.GetLength(0); col ++)
@@ -61,14 +65,17 @@ namespace Day3
             //Reset to starting position
             currentx = startx;
             currenty = starty;
+            stepping = 0;
             Console.WriteLine("Processing Wire 2");
             foreach (string path in wire2)
             {
-                Process(ref currentx, ref currenty,path,grid);
+                Process(ref currentx, ref currenty,path,grid, steps2, ref stepping);
             }
 
             //Calculate and save distances into list
             List<int> distances = new List<int>();
+            List<int> totalsteps = new List<int>();
+
             for (int col =0; col < grid.GetLength(0); col ++)
             {
                 for (int row =0; row < grid.GetLength(1); row ++)
@@ -78,8 +85,9 @@ namespace Day3
                         //Console.WriteLine("Grid square value at: " + col + "," + row + " is: " + grid[col,row]);
                         int distance =CalculateManhattanDistance(col,row,startx,starty);
                         if (distance > 0){
-                            Console.WriteLine("Distance: " + distance + " coordinates: " + col + "," + row);
+                            //Console.WriteLine("Distance: " + distance + " coordinates: " + col + "," + row);
                             distances.Add(distance);
+                            totalsteps.Add(steps1[col,row]+steps2[col,row]);
                         }
                         
                     }
@@ -88,10 +96,14 @@ namespace Day3
 
             int smallestDistance = distances.Min(c => c);
             Console.WriteLine("Smallest distance found is: " + smallestDistance);
+
+            int leaststeps = totalsteps.Min(c => c);
+            Console.WriteLine("Smallest number of steps found is: " + leaststeps);
+            //totalsteps.ForEach(Console.WriteLine);
             //distances.ForEach(Console.WriteLine);
 
         }
-        static void Process(ref int currentx, ref int currenty, string path, byte[,] grid)
+        static void Process(ref int currentx, ref int currenty, string path, byte[,] grid, int[,] steps, ref int stepping)
         {
             Console.WriteLine("Currently processing path: " + path + " starting from: " + currentx + "," + currenty);
             if (path[0] == 'U'){
@@ -101,6 +113,13 @@ namespace Day3
                     Console.WriteLine("Adding 1 to coordinates: " + (currentx+1) + "," + currenty);
                     grid[(currentx+1),currenty]++;
                     delta--;
+                    
+                    if (steps[currentx+1,currenty] == 0)
+                    {
+                        steps[currentx+1,currenty] = stepping;
+                        stepping ++;
+                    }
+
                     currentx++;
                 }
             }
@@ -111,6 +130,13 @@ namespace Day3
                     Console.WriteLine("Adding 1 to coordinates: " + (currentx-1) + "," + currenty);
                     grid[(currentx-1),currenty]++;
                     delta--;
+                    
+                    if (steps[currentx-1,currenty] == 0)
+                    {
+                        steps[currentx-1,currenty] =stepping;
+                        stepping++;
+                    }
+                    
                     currentx--;
                 }
             }
@@ -121,6 +147,13 @@ namespace Day3
                     Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty-1));
                     grid[currentx,(currenty-1)]++;
                     delta--;
+                    
+                    if (steps[currentx,currenty-1] == 0)
+                    {
+                        steps[currentx,currenty-1] = stepping;
+                        stepping++;
+                    }
+                    
                     currenty--;
                 }
             }
@@ -131,6 +164,13 @@ namespace Day3
                     Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty+1));
                     grid[currentx,(currenty+1)]++;
                     delta--;
+                    
+                    if (steps[currentx,currenty+1] == 0)
+                    {
+                        steps[currentx,currenty+1] = stepping;
+                        stepping++;
+                    }
+                    
                     currenty++;
                 }
             }
