@@ -26,10 +26,7 @@ namespace Day3
             int[,] steps1 = new int[gridsize,gridsize];
             int[,] steps2 = new int[gridsize,gridsize];
             
-            //TEST DATA
-            // byte[,]grid = new byte[1000,1000];
-            // int startx= 500;
-            // int starty = 500;
+            // //TEST DATA
             // string[] wire1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72".Split(",");
             // string[] wire2 = "U62,R66,U55,R34,D71,R55,D58,R83".Split(",");
             
@@ -40,7 +37,7 @@ namespace Day3
             int currenty = starty;
 
             grid[startx,starty] = (2); //both wires start and therefore touch the starting position
-            int stepping = 0;
+            int stepping = 1;
             //process wire1
             Console.WriteLine("Processing Wire 1");
             foreach (string path in wire1)
@@ -65,7 +62,7 @@ namespace Day3
             //Reset to starting position
             currentx = startx;
             currenty = starty;
-            stepping = 0;
+            stepping = 1;
             Console.WriteLine("Processing Wire 2");
             foreach (string path in wire2)
             {
@@ -80,14 +77,17 @@ namespace Day3
             {
                 for (int row =0; row < grid.GetLength(1); row ++)
                 {
-                    if (grid[col,row] > 1)
+                    if (grid[col,row] == 2)
                     {
                         //Console.WriteLine("Grid square value at: " + col + "," + row + " is: " + grid[col,row]);
                         int distance =CalculateManhattanDistance(col,row,startx,starty);
+                        int steps = steps1[col,row]+steps2[col,row];
                         if (distance > 0){
-                            //Console.WriteLine("Distance: " + distance + " coordinates: " + col + "," + row);
+                            Console.WriteLine("Distance: " + distance + " coordinates: " + col + "," + row);
+                            Console.WriteLine("Steps: " + steps + " coordinates: " + col + "," + row);
+                            
                             distances.Add(distance);
-                            totalsteps.Add(steps1[col,row]+steps2[col,row]);
+                            totalsteps.Add(steps);
                         }
                         
                     }
@@ -99,7 +99,18 @@ namespace Day3
 
             int leaststeps = totalsteps.Min(c => c);
             Console.WriteLine("Smallest number of steps found is: " + leaststeps);
-            //totalsteps.ForEach(Console.WriteLine);
+            // Console.WriteLine(steps1[startx,starty]);
+            // Console.WriteLine(steps1[startx+1,starty]);
+            // Console.WriteLine(steps1[startx,starty+1]);
+            // Console.WriteLine(steps1[startx-1,starty]);
+            // Console.WriteLine(steps1[startx,starty-1]);
+            // Console.WriteLine(steps2[startx,starty]);
+            // Console.WriteLine(steps2[startx+1,starty]);
+            // Console.WriteLine(steps2[startx,starty+1]);
+            // Console.WriteLine(steps2[startx-1,starty]);
+            // Console.WriteLine(steps2[startx,starty-1]);
+            
+            totalsteps.ForEach(Console.WriteLine);
             //distances.ForEach(Console.WriteLine);
 
         }
@@ -110,7 +121,7 @@ namespace Day3
                 int delta = Int32.Parse(path.Substring(1));
                 while (delta>0)
                 {
-                    Console.WriteLine("Adding 1 to coordinates: " + (currentx+1) + "," + currenty);
+                    //Console.WriteLine("Adding 1 to coordinates: " + (currentx+1) + "," + currenty);
                     grid[(currentx+1),currenty]++;
                     delta--;
                     
@@ -127,7 +138,7 @@ namespace Day3
                 int delta = Int32.Parse(path.Substring(1));
                 while (delta>0)
                 {
-                    Console.WriteLine("Adding 1 to coordinates: " + (currentx-1) + "," + currenty);
+                    //Console.WriteLine("Adding 1 to coordinates: " + (currentx-1) + "," + currenty);
                     grid[(currentx-1),currenty]++;
                     delta--;
                     
@@ -144,7 +155,7 @@ namespace Day3
                 int delta = Int32.Parse(path.Substring(1));
                 while (delta>0)
                 {
-                    Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty-1));
+                    //Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty-1));
                     grid[currentx,(currenty-1)]++;
                     delta--;
                     
@@ -161,7 +172,7 @@ namespace Day3
                 int delta = Int32.Parse(path.Substring(1));
                 while (delta>0)
                 {
-                    Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty+1));
+                    //Console.WriteLine("Adding 1 to coordinates: " + currentx + "," + (currenty+1));
                     grid[currentx,(currenty+1)]++;
                     delta--;
                     
