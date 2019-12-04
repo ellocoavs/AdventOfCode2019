@@ -73,9 +73,9 @@ namespace Day3
             List<int> distances = new List<int>();
             List<int> totalsteps = new List<int>();
 
-            for (int col =0; col < grid.GetLength(0); col ++)
+            for (int col =0; col < grid.GetLength(0) -1; col ++)
             {
-                for (int row =0; row < grid.GetLength(1); row ++)
+                for (int row =0; row < grid.GetLength(1) -1; row ++)
                 {
                     if (grid[col,row] == 2)
                     {
