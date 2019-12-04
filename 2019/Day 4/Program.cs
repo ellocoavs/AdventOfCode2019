@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace Day_4
@@ -8,14 +9,13 @@ namespace Day_4
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             int lownumber = 137683;
             int highnumber = 596253;
             List<int>validnumbers = new List<int>();
 
-            int test1 = 111111;
-            int test2 = 223450;
-            int test3 = 123789;
+            int test1 = 112233;
+            int test2 = 123444;
+            int test3 = 111122;
             // loop through all numbers in range with both checks, adding to a list if is passed both tests
             for (int i = lownumber; i <= highnumber; i++)
             {
@@ -43,7 +43,7 @@ namespace Day_4
             string number = x.ToString();
             for ( int i = 1 ; i < number.Length && !doublefound ; ++i )
             {
-                doublefound = number[i] == number[i-1] ;
+                doublefound = (number[i] == number[i-1] && !OccursMoreThanTwice(number,i));
             }
             return doublefound;
         }
@@ -57,6 +57,13 @@ namespace Day_4
                 decreasefound = number[i] < number[i-1] ;
             }
             return decreasefound;
+        }
+
+        static Boolean OccursMoreThanTwice (string number, int i)
+        {
+            bool MoreThanTwice = false;
+            MoreThanTwice = number.Count(c => c == number[i]) > 2;
+            return MoreThanTwice;
         }
     }
 }
