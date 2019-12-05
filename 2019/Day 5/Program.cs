@@ -7,7 +7,7 @@ namespace Day_5
     {
         static class Globals
         {
-            public static int input = 1;
+            public static int input = 5;
         }
         static void Main(string[] args)
         {
@@ -34,7 +34,7 @@ namespace Day_5
         
         static int Compute (int[] opcodes) 
         {
-            for (int position = 0; ; position +=2)  //edit to do +1 and do an extra +3 if needed
+            for (int position = 0; ; )
             {
                 int actualOpcode = opcodes[position] % 100; //last two digits
                 bool isPosMode1 = (opcodes[position] / 100) % 10 == 0; // digit before last two
@@ -48,35 +48,76 @@ namespace Day_5
                 //Console.WriteLine("Operands at: " + opcodes[position+1] + "," + opcodes[position+2] + " are: "+  opcodes[opcodes[position+1]] + "," + opcodes[opcodes[position+2]] );
               
 
-                if (actualOpcode == 1) //ADD
+                if (actualOpcode == 1) //ADD 3 params
                 {
                     //OLD WAY opcodes[opcodes[position+3]] = opcodes[opcodes[position+1]] + opcodes[opcodes[position+2]];
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 + parameter2;
-                    position += 2;
+                    position += 4; //+4 because 1 op + 3 params
                 }
-                else if (actualOpcode == 2) //Multiply
+                else if (actualOpcode == 2) //Multiply 3 params
                 {
                     //opcodes[opcodes[position+3]] = opcodes[opcodes[position+1]] * opcodes[opcodes[position+2]];
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 * parameter2;
-                    position += 2;
+                    position += 4;
                 }
-                else if (actualOpcode == 3) //only one parameter, no +3 needed. grab input from user and store at parameter
+                else if (actualOpcode == 3) //only one parameter. grab input from user and store at parameter
                 {
                     opcodes[opcodes[position+1]] = Globals.input;
                     //Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    position += 2;
                 }
-                else if (actualOpcode == 4) //print what's stored at parameter
+                else if (actualOpcode == 4) //print what's stored at parameter1
                 {
                     Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    position += 2;
                 }
+                else if (actualOpcode == 5) //jump-if-true, 2 params
+                {
+                    //Console.WriteLine(opcodes[opcodes[position+1]]);
+                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    //if param 1 true go to param 2 else position += 2;
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
+                    if (parameter1 > 0){position=parameter2;} else {position += 3;}
+                }
+                else if (actualOpcode == 6) //jump-if-false 2 params
+                {
+                    //Console.WriteLine(opcodes[opcodes[position+1]]);
+                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    // if param 1 fals go to param 2 else position += 2;
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
+                    if (parameter1 == 0){position=parameter2;} else {position += 3;}
+                }
+                else if (actualOpcode == 7) //less than, 3 params
+                {
+                    //Console.WriteLine(opcodes[opcodes[position+1]]);
+                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    // if param 1less than param2 -> 1 else -> 0
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
+                    opcodes[opcodes[position+3]] = parameter1 < parameter2 ? 1  : 0;
+                    position += 4;
+                }
+                else if (actualOpcode == 8) //equals, 3 params
+                {
+                    //Console.WriteLine(opcodes[opcodes[position+1]]);
+                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    // if param1 equals param2 -> 1 else 0
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : opcodes[position+2];
+                    opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1 : 0;
+                    position += 4;
+                }
+                
                 else if (actualOpcode == 99)
                 {
                     Console.WriteLine("Code 99 encountered, stopping after seeing opcode 99 at: " + position);
