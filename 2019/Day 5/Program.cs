@@ -41,8 +41,8 @@ namespace Day_5
                 bool isPosMode2 = (opcodes[position] / 1000) % 10 == 0; //digit before last three
                 bool isPosMode3 = (opcodes[position] / 10000) % 10 == 0; // digit before last four
 
-                Console.WriteLine("Opcode at position 0 is: " + actualOpcode);
-                Console.WriteLine("IsPositionalMode values are " + isPosMode1+isPosMode2+isPosMode3);
+                //Console.WriteLine("Opcode at position 0 is: " + actualOpcode);
+                //Console.WriteLine("IsPositionalMode values are " + isPosMode1+isPosMode2+isPosMode3);
                 
                 //Console.WriteLine("Processing opcodes: " + opcodes[position] + "," + opcodes[position+1]+ "," + opcodes[position+2] + "," + opcodes[position+3]);
                 //Console.WriteLine("Operands at: " + opcodes[position+1] + "," + opcodes[position+2] + " are: "+  opcodes[opcodes[position+1]] + "," + opcodes[opcodes[position+2]] );
@@ -69,7 +69,7 @@ namespace Day_5
                 else if (actualOpcode == 3) //only one parameter, no +3 needed. grab input from user and store at parameter
                 {
                     opcodes[opcodes[position+1]] = Globals.input;
-                    Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
+                    //Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                 }
                 else if (actualOpcode == 4) //print what's stored at parameter
