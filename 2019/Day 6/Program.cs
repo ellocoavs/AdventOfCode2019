@@ -9,10 +9,19 @@ namespace Day_6
         static void Main(string[] args)
         {
             var orbits = File.ReadAllLines("input.txt");
-            int orbitCounter = 0;
+            
+            
             List<string> leftsides = new List<string>();
             List<string> rightsides = new List<string>();
-
+            
+            string startPlanet = "YOU";
+            List<string> startToCOM = new List<string>();
+            string endPlanet = "SAN";
+            List<string> endToCOM = new List<string>();
+            string centerplanet = "COM";
+            string commonAncestor = "";
+            int startToAncestor = 0;
+            int endToAncestor = 0;
 
             foreach (string orbitline in orbits)
             {
@@ -22,14 +31,52 @@ namespace Day_6
                 rightsides.Add(rightside);
             }
 
-            for (int i =0; i < rightsides.Count; i++)
-            {
-                orbitCounter += FindOrbits(rightsides[i],leftsides,rightsides);
-            }
+            pathToCom(startPlanet,leftsides,rightsides,startToCOM);
+            Console.WriteLine(startToCOM.Count);
 
-            Console.WriteLine("Total number of orbits is: " + orbitCounter);
+            pathToCom(endPlanet,leftsides,rightsides,endToCOM);
+            Console.WriteLine(endToCOM.Count);
+
+            commonAncestor = findFirstCommon(startToCOM, endToCOM);
+            if (commonAncestor != null)
+            {
+                Console.WriteLine(commonAncestor);
+            }
+            startToAncestor = startToCOM.IndexOf(commonAncestor);
+            endToAncestor = endToCOM.IndexOf(commonAncestor);
+            
+            Console.WriteLine("First index: " + startToAncestor);
+            Console.WriteLine("Second index: " + endToAncestor);
+            Console.WriteLine("So result should be: " + (startToAncestor+endToAncestor));
+            // for (int i =0; i < rightsides.Count; i++)
+            // {
+            //     orbitCounter += FindOrbits(rightsides[i],leftsides,rightsides);
+            // }
+
+            // Console.WriteLine("Total number of orbits is: " + orbitCounter);
         }
 
+        static void pathToCom (string startfrom,List<string> leftsides,List<string> rightsides, List<string> path)
+        {
+            if (startfrom != "COM")
+            {
+                string parent = leftsides[rightsides.IndexOf(startfrom)];
+                path.Add(parent);
+                pathToCom(parent, leftsides,rightsides,path);
+            }
+        }
+        static string findFirstCommon (List<string> start, List<string> end)
+        {
+            foreach (string step in start)
+            {
+                if (end.Contains(step))
+                {
+                    //return common ancestor
+                    return step;
+                }
+            }
+            return null;
+        }
         static int FindOrbits(string rightside, List<string> leftsides,List<string> rightsides)
         {
             if (rightside != "COM")
