@@ -26,7 +26,7 @@ namespace Day_7
             }
             Array.Copy(original,opcodes,100000);
 
-            string phases = "01234";
+            string phases = "56789"; //day 7 part 2 phase options
             char[] arr = phases.ToCharArray();
             GetPer(arr); //put all permutation in that global list
 
