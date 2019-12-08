@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Day_7
 {
@@ -8,6 +9,7 @@ namespace Day_7
         static class Globals
         {
             //public static int input = 5; from day 5
+            public static List<string> phasepermutations = new List<string>();
         }
         static void Main(string[] args)
         {
@@ -24,11 +26,48 @@ namespace Day_7
             }
             Array.Copy(original,opcodes,100000);
 
-            int result = 0 ;
-            result = Compute(opcodes);   
+            string phases = "01234";
+            List<string> phasepermutations = new List<string>();
+            char[] arr = phases.ToCharArray();
+            GetPer(arr);
+
+
+            // int result = 0 ;
+            // result = Compute(opcodes);   
         }
             
-            
+        private static void Swap(ref char a, ref char b)
+        {
+            if (a == b) return;
+
+            var temp = a;
+            a = b;
+            b = temp;
+        }
+
+        public static void GetPer(char[] list)
+        {
+            int x = list.Length - 1;
+            GetPer(list, 0, x);
+        }
+
+        private static void GetPer(char[] list, int k, int m)
+        {
+            if (k == m)
+            {
+                Console.Write(list);
+                string perm = new string(list);
+                Globals.phasepermutations.Add(perm);
+            }
+            else
+                for (int i = k; i <= m; i++)
+                {
+                    Swap(ref list[k], ref list[i]);
+                    GetPer(list, k + 1, m);
+                    Swap(ref list[k], ref list[i]);
+                }
+        }
+    
             
            
         
@@ -130,6 +169,7 @@ namespace Day_7
 
             }
             return opcodes[0];
+
         }
     }
 }
