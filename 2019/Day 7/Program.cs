@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Day_7
 {
@@ -8,7 +9,6 @@ namespace Day_7
     {
         static class Globals
         {
-            //public static int input = 5; from day 5
             public static List<string> phasepermutations = new List<string>();
         }
         static void Main(string[] args)
@@ -27,13 +27,25 @@ namespace Day_7
             Array.Copy(original,opcodes,100000);
 
             string phases = "01234";
-            List<string> phasepermutations = new List<string>();
             char[] arr = phases.ToCharArray();
-            GetPer(arr);
+            GetPer(arr); //put all permutation in that global list
 
+            List<int> finalsignals = new List<int>(); //all final signals from the 5 compute rounds stored here, find the max value here
 
-            // int result = 0 ;
-            // result = Compute(opcodes);   
+            foreach (string perm in Globals.phasepermutations){
+                char[] currentperm = perm.ToCharArray();
+                int[] intperm = Array.ConvertAll(currentperm, c => (int)Char.GetNumericValue(c));
+                int result =0;
+                result = Compute(opcodes,intperm[0],0);
+                result = Compute(opcodes,intperm[1],result);
+                result = Compute(opcodes,intperm[2],result);
+                result = Compute(opcodes,intperm[3],result);
+                result = Compute(opcodes,intperm[4],result);
+                finalsignals.Add(result);
+            }
+
+            int maxSignal = finalsignals.Max(t => t);
+            Console.WriteLine("Maximum thrust signal reached was: " + maxSignal);
         }
             
         private static void Swap(ref char a, ref char b)
@@ -55,7 +67,7 @@ namespace Day_7
         {
             if (k == m)
             {
-                Console.Write(list);
+                //Console.Write(list);
                 string perm = new string(list);
                 Globals.phasepermutations.Add(perm);
             }
@@ -128,9 +140,10 @@ namespace Day_7
                 }
                 else if (actualOpcode == 4) //print what's stored at parameter1
                 {
-                    Console.WriteLine(opcodes[opcodes[position+1]]);
+                    //Console.WriteLine(opcodes[opcodes[position+1]]);
+                    return opcodes[opcodes[position+1]];
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
-                    position += 2;
+                    //position += 2;
                 }
                 else if (actualOpcode == 5) //jump-if-true, 2 params
                 {
