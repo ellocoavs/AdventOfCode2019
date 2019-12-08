@@ -71,8 +71,9 @@ namespace Day_7
             
            
         
-        static int Compute (int[] opcodes) 
+        static int Compute (int[] opcodes, int phase, int inputsignal) 
         {
+            int inputshandled = 0;
             for (int position = 0; ; )
             {
                 int actualOpcode = opcodes[position] % 100; //last two digits
@@ -107,7 +108,20 @@ namespace Day_7
                 }
                 else if (actualOpcode == 3) //only one parameter. grab input from user and store at parameter
                 {
-                    opcodes[opcodes[position+1]] = Globals.input;
+                    if (inputshandled == 0)
+                    {
+                        opcodes[opcodes[position+1]] = phase;
+                        inputshandled++;
+                    }
+                    else if (inputshandled == 1)
+                    {
+                        opcodes[opcodes[position+1]] = inputsignal;
+                        inputshandled++;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input request, only two allowed at position: " + position);
+                    }
                     //Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
