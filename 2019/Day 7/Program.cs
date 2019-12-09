@@ -16,7 +16,8 @@ namespace Day_7
         }
         static void Main(string[] args)
         {
-            var text = File.ReadAllText("input.txt");
+            var text = File.ReadAllText("testinput1.txt");
+            //var text = File.ReadAllText("input.txt");
             string[] split = text.Split(",");
             int[] original = new int[100000];
             int[] opcodes0= new int[100000];
@@ -31,13 +32,9 @@ namespace Day_7
                 original[counter] =Int32.Parse(x);
                 counter++;
             }
-            Array.Copy(original,opcodes0,100000);
-            Array.Copy(original,opcodes1,100000);
-            Array.Copy(original,opcodes2,100000);
-            Array.Copy(original,opcodes3,100000);
-            Array.Copy(original,opcodes4,100000);
+        
 
-            string phases = "56789"; //day 7 part 2 phase options
+            string phases = "98765"; //day 7 part 2 phase options
             char[] arr = phases.ToCharArray();
             GetPer(arr); //put all permutation in that global list
 
@@ -46,9 +43,14 @@ namespace Day_7
             }
             List<int> finalsignals = new List<int>(); //all final signals from the 5 compute rounds stored here, find the max value here
 
-            foreach (string perm in Globals.phasepermutations){
-                char[] currentperm = perm.ToCharArray();
-                //char[] currentperm = phases.ToCharArray();
+            //foreach (string perm in Globals.phasepermutations){
+                Array.Copy(original,opcodes0,100000);
+                Array.Copy(original,opcodes1,100000);
+                Array.Copy(original,opcodes2,100000);
+                Array.Copy(original,opcodes3,100000);
+                Array.Copy(original,opcodes4,100000);
+               // char[] currentperm = perm.ToCharArray();
+                char[] currentperm = phases.ToCharArray();
                 int[] intperm = Array.ConvertAll(currentperm, c => (int)Char.GetNumericValue(c));
                 
                 Task task0 = new Task( () => ComputeAsync(opcodes0,intperm[0],0));
@@ -65,10 +67,10 @@ namespace Day_7
 
                 Task.WaitAll(task0,task1,task2,task3,task4);
 
-                Globals.result= Globals.outputs[4].Item1;
+                Globals.result= Globals.outputs[0].Item1;
                 
                 finalsignals.Add(Globals.result);
-            }
+            //}
             Task.WaitAll();
             int maxSignal = finalsignals.Max(t => t);
             Console.WriteLine("Maximum thrust signal reached was: " + maxSignal);
