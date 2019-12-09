@@ -10,6 +10,7 @@ namespace Day_7
         static class Globals
         {
             public static List<string> phasepermutations = new List<string>();
+            public static Tuple<int,bool>[] outputs = new Tuple<int,bool>[5];
         }
         static void Main(string[] args)
         {
@@ -30,17 +31,20 @@ namespace Day_7
             char[] arr = phases.ToCharArray();
             GetPer(arr); //put all permutation in that global list
 
+            for (int i = 0; i<Globals.outputs.Length; i++) {
+                Globals.outputs[i]= new Tuple<int,bool>(0,false);
+            }
             List<int> finalsignals = new List<int>(); //all final signals from the 5 compute rounds stored here, find the max value here
 
             foreach (string perm in Globals.phasepermutations){
                 char[] currentperm = perm.ToCharArray();
                 int[] intperm = Array.ConvertAll(currentperm, c => (int)Char.GetNumericValue(c));
                 int result =0;
-                result = Compute(opcodes,intperm[0],0);
-                result = Compute(opcodes,intperm[1],result);
-                result = Compute(opcodes,intperm[2],result);
-                result = Compute(opcodes,intperm[3],result);
-                result = Compute(opcodes,intperm[4],result);
+                result = Compute(opcodes,intperm[0],"A");
+                result = Compute(opcodes,intperm[1],"B");
+                result = Compute(opcodes,intperm[2],"C");
+                result = Compute(opcodes,intperm[3],"D");
+                result = Compute(opcodes,intperm[4],"E");
                 finalsignals.Add(result);
             }
 
@@ -83,7 +87,7 @@ namespace Day_7
             
            
         
-        static int Compute (int[] opcodes, int phase, int inputsignal) 
+        static int Compute (int[] opcodes, int phase, string amplifier) 
         {
             int inputshandled = 0;
             for (int position = 0; ; )
@@ -120,12 +124,14 @@ namespace Day_7
                 }
                 else if (actualOpcode == 3) //only one parameter. grab input from user and store at parameter
                 {
-                    if (inputshandled == 0)
+                    //change to grab input from globals, and to wait if the input if not there (0,false)
+                    //note: first grab the phaseinput, then always wait for the input from previous amp.
+                    if (inputshandled == 0)  //phase setting, leave as is.
                     {
                         opcodes[opcodes[position+1]] = phase;
                         inputshandled++;
                     }
-                    else if (inputshandled == 1)
+                    else if (inputshandled == 1) //in this case grab from globals
                     {
                         opcodes[opcodes[position+1]] = inputsignal;
                         inputshandled++;
@@ -138,7 +144,7 @@ namespace Day_7
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
                 }
-                else if (actualOpcode == 4) //print what's stored at parameter1
+                else if (actualOpcode == 4) //store in globals value,true for next amp
                 {
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     return opcodes[opcodes[position+1]];
