@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Day_7
 {
@@ -13,6 +14,7 @@ namespace Day_7
             public static List<string> phasepermutations = new List<string>();
             public static Tuple<int,bool>[] outputs = new Tuple<int,bool>[5];
             public static int result =0;
+            public static int input = 0;
         }
         static void Main(string[] args)
         {
@@ -159,13 +161,19 @@ namespace Day_7
                         opcodes[opcodes[position+1]] = phase;
                         inputshandled++;
                     }
+                    else if (inputshandled == 1 && amplifier==0 ){
+                        opcodes[opcodes[position+1]] = Globals.input;
+                        Console.WriteLine("Processing input 0 for amp " + amplifier);
+                    }
+                    
                     else  //in this case grab from globals
                     {
-                        while ((Globals.outputs[amplifier].Item2))
+                        while (Globals.outputs[amplifier].Item2 == false)
                         {
                             //Console.WriteLine("Waiting for input in amp: " + amplifier);
                             //Console.WriteLine((Globals.outputs[amplifier].Item1).ToString() + (Globals.outputs[amplifier].Item2));
-                            await Task.Delay(25);
+                            //await Task.Delay(1000);
+                            Thread.Sleep(1000);
                         }
                         Console.WriteLine("Processing input in amp: " + amplifier);
                         opcodes[opcodes[position+1]] = Globals.outputs[amplifier].Item1;
@@ -174,7 +182,7 @@ namespace Day_7
                     }
 
                     //Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
-                    Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
                 }
                 else if (actualOpcode == 4) //store in globals value,true for next amp
