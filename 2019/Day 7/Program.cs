@@ -162,8 +162,9 @@ namespace Day_7
                         inputshandled++;
                     }
                     else if (inputshandled == 1 && amplifier==0 ){
-                        opcodes[opcodes[position+1]] = Globals.input;
                         Console.WriteLine("Processing input 0 for amp " + amplifier);
+                        opcodes[opcodes[position+1]] = Globals.input;
+                        inputshandled++;
                     }
                     
                     else  //in this case grab from globals
