@@ -55,8 +55,8 @@ namespace Day_9
                 {
                     //OLD WAY opcodes[opcodes[position+3]] = opcodes[opcodes[position+1]] + opcodes[opcodes[position+2]];
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 + parameter2;
                     position += 4; //+4 because 1 op + 3 params
                 }
@@ -64,8 +64,8 @@ namespace Day_9
                 {
                     //opcodes[opcodes[position+3]] = opcodes[opcodes[position+1]] * opcodes[opcodes[position+2]];
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 * parameter2;
                     position += 4;
                 }
@@ -78,8 +78,7 @@ namespace Day_9
                 }
                 else if (actualOpcode == 4) //print what's stored at parameter1
                 {
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    Console.WriteLine(parameter1);
+                    Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
                 }
@@ -88,8 +87,8 @@ namespace Day_9
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     //if param 1 true go to param 2 else position += 2;
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] :opcodes[position+2];
                     if (parameter1 > 0){position=parameter2;} else {position += 3;}
                 }
                 else if (actualOpcode == 6) //jump-if-false 2 params
@@ -97,8 +96,8 @@ namespace Day_9
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     // if param 1 fals go to param 2 else position += 2;
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] : opcodes[position+2];
                     if (parameter1 == 0){position=parameter2;} else {position += 3;}
                 }
                 else if (actualOpcode == 7) //less than, 3 params
@@ -106,8 +105,8 @@ namespace Day_9
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     // if param 1less than param2 -> 1 else -> 0
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 < parameter2 ? 1  : 0;
                     position += 4;
                 }
@@ -116,8 +115,8 @@ namespace Day_9
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     // if param1 equals param2 -> 1 else 0
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
+                    var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2+Globals.relativeBase]] : opcodes[position+2];
                     opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1 : 0;
                     position += 4;
                 }
@@ -126,9 +125,8 @@ namespace Day_9
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     // if param1 equals param2 -> 1 else 0
-                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
+                    var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1+Globals.relativeBase]] : opcodes[position+1];
                     Globals.relativeBase += parameter1;
-                    position += 2;
                 }
                 else if (actualOpcode == 99)
                 {
