@@ -12,7 +12,7 @@ namespace Day_9
         }
         static void Main(string[] args)
         {
-            var text = File.ReadAllText("testinput1.txt");
+            var text = File.ReadAllText("input.txt");
             string[] split = text.Split(",");
             //Int64[] original = new Int64[1000000000];
             Int64[] opcodes= new Int64[50000000];
@@ -78,9 +78,10 @@ namespace Day_9
                 }
                 else if (actualOpcode == 4) //print what's stored at parameter1
                 {
+                    
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     Console.WriteLine(parameter1);
-                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
+                    Console.WriteLine("Result stored at position: " + position + " is: " + parameter1);
                     position += 2;
                 }
                 else if (actualOpcode == 5) //jump-if-true, 2 params
