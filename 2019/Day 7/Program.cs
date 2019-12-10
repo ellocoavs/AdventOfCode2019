@@ -18,8 +18,8 @@ namespace Day_7
         }
         static void Main(string[] args)
         {
-            var text = File.ReadAllText("testinput1.txt");
-            //var text = File.ReadAllText("input.txt");
+            //var text = File.ReadAllText("testinput2.txt");
+            var text = File.ReadAllText("input.txt");
             string[] split = text.Split(",");
             int[] original = new int[100000];
             int[] opcodes0= new int[100000];
@@ -40,21 +40,22 @@ namespace Day_7
             char[] arr = phases.ToCharArray();
             GetPer(arr); //put all permutation in that global list
 
-            for (int i = 0; i<Globals.outputs.Length; i++) {
-                Globals.outputs[i]= new Tuple<int,bool>(0,false);
-            }
+            
             List<int> finalsignals = new List<int>(); //all final signals from the 5 compute rounds stored here, find the max value here
 
-            //foreach (string perm in Globals.phasepermutations){
+            foreach (string perm in Globals.phasepermutations){
+                for (int i = 0; i<Globals.outputs.Length; i++) {
+                Globals.outputs[i]= new Tuple<int,bool>(0,false);
+                }
                 Array.Copy(original,opcodes0,100000);
                 Array.Copy(original,opcodes1,100000);
                 Array.Copy(original,opcodes2,100000);
                 Array.Copy(original,opcodes3,100000);
                 Array.Copy(original,opcodes4,100000);
-               // char[] currentperm = perm.ToCharArray();
-                char[] currentperm = phases.ToCharArray();
+                char[] currentperm = perm.ToCharArray(); 
+                //char[] currentperm = phases.ToCharArray(); to test specific permutation
                 int[] intperm = Array.ConvertAll(currentperm, c => (int)Char.GetNumericValue(c));
-                
+                //Console.WriteLine("Starting iteration with phasepermutation: " + currentperm.ToString());
                 Task task0 = new Task( () => ComputeAsync(opcodes0,intperm[0],0));
                 task0.Start();
                 Task task1 = new Task( () => ComputeAsync(opcodes1,intperm[1],1));
@@ -70,9 +71,9 @@ namespace Day_7
                 Task.WaitAll(task0,task1,task2,task3,task4);
 
                 Globals.result= Globals.outputs[0].Item1;
-                
+                Console.WriteLine("Saving thrust signal result to finals: " + Globals.result);
                 finalsignals.Add(Globals.result);
-            //}
+            }
             Task.WaitAll();
             int maxSignal = finalsignals.Max(t => t);
             Console.WriteLine("Maximum thrust signal reached was: " + maxSignal);
@@ -157,12 +158,12 @@ namespace Day_7
                     //note: first grab the phaseinput, then always wait for the input from previous amp.
                     if (inputshandled == 0)  //phase setting, leave as is.
                     {
-                        Console.WriteLine("Processing phase input for amp " + amplifier);
+                        //Console.WriteLine("Processing phase input for amp " + amplifier);
                         opcodes[opcodes[position+1]] = phase;
                         inputshandled++;
                     }
                     else if (inputshandled == 1 && amplifier==0 ){
-                        Console.WriteLine("Processing input 0 for amp " + amplifier);
+                        //Console.WriteLine("Processing input 0 for amp " + amplifier);
                         opcodes[opcodes[position+1]] = Globals.input;
                         inputshandled++;
                     }
@@ -173,10 +174,10 @@ namespace Day_7
                         {
                             //Console.WriteLine("Waiting for input in amp: " + amplifier);
                             //Console.WriteLine((Globals.outputs[amplifier].Item1).ToString() + (Globals.outputs[amplifier].Item2));
-                            //await Task.Delay(1000);
-                            Thread.Sleep(1000);
+                            //await Task.Delay(100);
+                            Thread.Sleep(5);
                         }
-                        Console.WriteLine("Processing input in amp: " + amplifier);
+                        //Console.WriteLine("Processing input in amp: " + amplifier);
                         opcodes[opcodes[position+1]] = Globals.outputs[amplifier].Item1;
                         inputshandled++;
                         Globals.outputs[amplifier]= new Tuple<int,bool>(0,false);
@@ -190,9 +191,9 @@ namespace Day_7
                 {
                     //output = input for amp+1 unless amp 4 -> then 0
                     Globals.outputs[(amplifier+1)%5]= new Tuple<int,bool>(opcodes[opcodes[position+1]],true);
-                    if (amplifier==4){
-                        Console.WriteLine("Value outputted: " + opcodes[opcodes[position+1]]);
-                    }
+                   // if (amplifier==4){
+                     //   Console.WriteLine("Value outputted: " + opcodes[opcodes[position+1]]);
+                    //}
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
                 }
@@ -237,7 +238,7 @@ namespace Day_7
                 
                 else if (actualOpcode == 99)
                 {
-                    Console.WriteLine("Code 99 encountered, stopping after seeing opcode 99 at: " + position);
+                    //Console.WriteLine("Code 99 encountered, stopping after seeing opcode 99 at: " + position);
                     break;
                 }
                 else
