@@ -12,8 +12,10 @@ namespace Day_10
             var input = File.ReadAllLines("input.txt");
             int width = input[0].Length;
             int height = input.Length;
+            (int,int)station = (22,17);
             //Console.WriteLine(width + "," + height);
             List<(int,int)> astroCoords = new List<(int, int)>(); //coordinates of all known astroids x,y
+            List<(int,int,double)> seenFromStation = new List<(int,int,double)>(); //list of all astroids visible from station with angle from station 
             int maxSeen = 0;
             for (int i=0; i<input.Length;i++)
             {
@@ -25,32 +27,52 @@ namespace Day_10
                     }
                 }
             }
+
             foreach ((int,int) coord in astroCoords)
             {
-                int seen = 0;
-                foreach ((int,int) othercoord in astroCoords)
+                if(coord != station)
                 {
-                    if (coord != othercoord) //if not itself
+                    double angle = Math.Atan2(coord.Item1-station.Item1,coord.Item2-station.Item2);
+                    double distance = GetDistance(coord.Item1,coord.Item2, station.Item1,station.Item2);
+                    bool sameanglecloser = FindSameAngleCloser( angle,  distance, coord, astroCoords);
+                    if (!sameanglecloser)
                     {
-                        //if there isn't an astroid with the same ANGLE (atan2)! and shorter distance, +1 seen.
-                        double angle = Math.Atan2(coord.Item1-othercoord.Item1,coord.Item2-othercoord.Item2);
-                        double distance = GetDistance(coord.Item1,coord.Item2, othercoord.Item1,othercoord.Item2);
-                        bool sameanglecloser = FindSameAngleCloser( angle,  distance, coord, astroCoords);
-                        if (!sameanglecloser)
-                        {
-                            seen++;
-                        }
+                        seenFromStation.Add((coord.Item1,coord.Item2,angle));
                     }
                 }
+            }
+            seenFromStation.Sort((x, y) => y.Item3.CompareTo(x.Item3));
+            foreach ((int,int,double) seenAstro in seenFromStation)
+            {
+                Console.WriteLine(seenAstro);
+            }
+            Console.WriteLine(seenFromStation.Count);
+            // foreach ((int,int) coord in astroCoords)
+            // {
+            //     int seen = 0;
+            //     foreach ((int,int) othercoord in astroCoords)
+            //     {
+            //         if (coord != othercoord) //if not itself
+            //         {
+            //             //if there isn't an astroid with the same ANGLE (atan2)! and shorter distance, +1 seen.
+            //             double angle = Math.Atan2(coord.Item1-othercoord.Item1,coord.Item2-othercoord.Item2);
+            //             double distance = GetDistance(coord.Item1,coord.Item2, othercoord.Item1,othercoord.Item2);
+            //             bool sameanglecloser = FindSameAngleCloser( angle,  distance, coord, astroCoords);
+            //             if (!sameanglecloser)
+            //             {
+            //                 seen++;
+            //             }
+            //         }
+            //     }
                 
                     
-                if (seen > maxSeen)
-                {
-                    maxSeen=seen;
-                    Console.WriteLine(coord.Item1+","+coord.Item2);
-                } //if bigger than max, save as new max
-            }
-            Console.WriteLine(maxSeen);
+            //     if (seen > maxSeen)
+            //     {
+            //         maxSeen=seen;
+            //         Console.WriteLine(coord.Item1+","+coord.Item2);
+            //     } //if bigger than max, save as new max
+            // }
+            // Console.WriteLine(maxSeen);
             
         }
         private static double GetDistance(int x1, int y1, int x2, int y2)
