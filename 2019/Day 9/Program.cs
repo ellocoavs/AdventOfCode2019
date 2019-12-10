@@ -7,7 +7,7 @@ namespace Day_9
     {
         static class Globals
         {
-            public static Int64 input = 1; // 1 is test mode
+            public static Int64 input = 2; // 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
         }
         static void Main(string[] args)
