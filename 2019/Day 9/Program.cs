@@ -57,7 +57,19 @@ namespace Day_9
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    opcodes[opcodes[position+3]] = parameter1 + parameter2;
+                    //opcodes[opcodes[position+3]] = parameter1 + parameter2;
+                    if (isPosMode3)
+                    {
+                        opcodes[opcodes[position+3]] = parameter1 + parameter2;
+                    }
+                    if (isRelMode3)
+                    {
+                        opcodes[opcodes[position+3]+Globals.relativeBase] = parameter1 + parameter2;
+                    }
+                    else //direct mode
+                    {
+                        opcodes[position+3] = parameter1 + parameter2;
+                    }
                     position += 4; //+4 because 1 op + 3 params
                 }
                 else if (actualOpcode == 2) //Multiply 3 params
@@ -66,12 +78,36 @@ namespace Day_9
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    opcodes[opcodes[position+3]] = parameter1 * parameter2;
+                    //opcodes[opcodes[position+3]] = parameter1 * parameter2;
+                    if (isPosMode3)
+                    {
+                        opcodes[opcodes[position+3]] = parameter1 * parameter2;
+                    }
+                    else if (isRelMode3)
+                    {
+                        opcodes[opcodes[position+3]+Globals.relativeBase] = parameter1 * parameter2;
+                    }
+                    else //direct mode
+                    {
+                        opcodes[position+3] = parameter1 * parameter2;
+                    }
                     position += 4;
                 }
                 else if (actualOpcode == 3) //only one parameter. grab input from user and store at parameter
                 {
-                    opcodes[opcodes[position+1]] = Globals.input;
+                    if (isPosMode1)
+                    {
+                        opcodes[opcodes[position+1]] = Globals.input;
+                    }
+                    else if (isRelMode1)
+                    {
+                        opcodes[opcodes[position+1]+Globals.relativeBase] = Globals.input;
+                    }
+                    else //direct mode
+                    {
+                        opcodes[position+1] =Globals.input;
+                    }
+                    //opcodes[opcodes[position+1]] = Globals.input;
                     //Console.WriteLine("Storing value: " + Globals.input + " at position: " +  opcodes[position+1]);
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
@@ -109,7 +145,19 @@ namespace Day_9
                     // if param 1less than param2 -> 1 else -> 0
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    opcodes[opcodes[position+3]] = parameter1 < parameter2 ? 1  : 0;
+                    //opcodes[opcodes[position+3]] = parameter1 < parameter2 ? 1  : 0;
+                    if (isPosMode3)
+                    {
+                        opcodes[opcodes[position+3]] = parameter1 < parameter2 ? 1  : 0;
+                    }
+                    else if (isRelMode3)
+                    {
+                        opcodes[opcodes[position+3]+Globals.relativeBase] = parameter1 < parameter2 ? 1  : 0;
+                    }
+                    else //direct mode
+                    {
+                        opcodes[position+3] = parameter1 < parameter2 ? 1  : 0;
+                    }
                     position += 4;
                 }
                 else if (actualOpcode == 8) //equals, 3 params
@@ -119,7 +167,20 @@ namespace Day_9
                     // if param1 equals param2 -> 1 else 0
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1 : 0;
+                    //opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1 : 0;
+
+                    if (isPosMode3)
+                    {
+                        opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1  : 0;
+                    }
+                    else if (isRelMode3)
+                    {
+                        opcodes[opcodes[position+3]+Globals.relativeBase] = parameter1 == parameter2 ? 1  : 0;
+                    }
+                    else //direct mode
+                    {
+                        opcodes[position+3] = parameter1 == parameter2 ? 1  : 0;
+                    }
                     position += 4;
                 }
                 else if (actualOpcode == 9) //adjust relative base, 1 params
