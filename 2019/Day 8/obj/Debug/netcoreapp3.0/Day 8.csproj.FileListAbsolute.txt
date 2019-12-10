@@ -1,0 +1,11 @@
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.exe
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.deps.json
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.runtimeconfig.json
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.runtimeconfig.dev.json
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.dll
+C:\GitProjects\AdventOfCode\2019\Day 8\bin\Debug\netcoreapp3.0\Day 8.pdb
+C:\GitProjects\AdventOfCode\2019\Day 8\obj\Debug\netcoreapp3.0\Day 8.csprojAssemblyReference.cache
+C:\GitProjects\AdventOfCode\2019\Day 8\obj\Debug\netcoreapp3.0\Day 8.AssemblyInfoInputs.cache
+C:\GitProjects\AdventOfCode\2019\Day 8\obj\Debug\netcoreapp3.0\Day 8.AssemblyInfo.cs
+C:\GitProjects\AdventOfCode\2019\Day 8\obj\Debug\netcoreapp3.0\Day 8.dll
+C:\GitProjects\AdventOfCode\2019\Day 8\obj\Debug\netcoreapp3.0\Day 8.pdb
