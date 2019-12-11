@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>Day_10</RootNamespace>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
 </Project>

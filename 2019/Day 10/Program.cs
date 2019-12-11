@@ -9,11 +9,11 @@ namespace Day_10
     {
         static void Main(string[] args)
         {
-            var input = File.ReadAllLines("input.txt");
-            (int,int)station = (22,17);
+            // var input = File.ReadAllLines("input.txt");
+            // (int,int)station = (22,17);
 
-            //var input = File.ReadAllLines("testinput4.txt");
-            //(int,int)station = (11,13);
+            var input = File.ReadAllLines("testinput4.txt");
+            (int,int)station = (11,13);
             
             
             int width = input[0].Length;
@@ -29,7 +29,7 @@ namespace Day_10
                 {
                     if (input[i][j]=='#')
                     {
-                        astroCoords.Add((i,j));
+                        astroCoords.Add((j,i));
                     }
                 }
             }
@@ -38,7 +38,7 @@ namespace Day_10
             {
                 if(coord != station)
                 {
-                    double angle = Math.Atan2(station.Item1-coord.Item1,station.Item2-coord.Item2) ;
+                    double angle = Math.Atan2(station.Item2-coord.Item2,station.Item1-coord.Item1) ;
                     double distance = GetDistance(coord.Item1,coord.Item2, station.Item1,station.Item2);
                     bool sameanglecloser = FindSameAngleCloser( angle,  distance, station, astroCoords);
                     if (!sameanglecloser)
@@ -47,17 +47,36 @@ namespace Day_10
                     }
                 }
             }
-            seenFromStation.Sort((x, y) => (y.Item3*-1).CompareTo(x.Item3*-1));
+            seenFromStation.Sort((x, y) => (y.Item3).CompareTo(x.Item3));
             foreach ((int,int,double) seenAstro in seenFromStation)
             {
                 Console.WriteLine(seenAstro);
             }
             Console.WriteLine(seenFromStation.Count);
-            Console.WriteLine(station);
-            (int,int) coordtest = (22,12);
+            Console.WriteLine("");
+            Console.WriteLine("Station at: " + station);
+            Console.WriteLine("");
+
+            Console.WriteLine("Checking two coords");
+            (int,int) coordtest = (11,11);
             Console.WriteLine(coordtest);
-            double angletest =  Math.Atan2(station.Item1-coordtest.Item1,station.Item2-coordtest.Item2);
+            double angletest =  Math.Atan2(station.Item2-coordtest.Item2,station.Item1-coordtest.Item1);
+            double distancetest = GetDistance(coordtest.Item1,coordtest.Item2, station.Item1,station.Item2);
+            bool closertest = FindSameAngleCloser(angletest,distancetest,station,astroCoords);
+            Console.WriteLine( closertest);
             Console.WriteLine( angletest);
+            Console.WriteLine( distancetest);
+            
+            Console.WriteLine("");
+
+            (int,int) coordtest2 = (11,12);
+            Console.WriteLine(coordtest2);
+            double angletest2 =  Math.Atan2(station.Item2-coordtest2.Item2,station.Item1-coordtest2.Item1);
+            double distancetest2 = GetDistance(coordtest2.Item1,coordtest2.Item2, station.Item1,station.Item2);
+            bool closertest2 = FindSameAngleCloser(angletest,distancetest2,station,astroCoords);
+            Console.WriteLine( closertest2);
+            Console.WriteLine( angletest2);
+            Console.WriteLine( distancetest2);
             //rechtomhoog zou pi/2 moeten zijn.. niet 0...
 
             // foreach ((int,int) coord in astroCoords)
@@ -100,7 +119,7 @@ namespace Day_10
             foreach ((int,int)other in astroCoords)
             {
                 double otherDist = GetDistance(station.Item1,station.Item2,other.Item1,other.Item2);
-                double otherAngle = Math.Atan2(station.Item1-other.Item1,station.Item2-other.Item2);
+                double otherAngle = Math.Atan2(station.Item2-other.Item2,station.Item1-other.Item1);
                 if (otherAngle == angle && otherDist < distance && station != other)
                 {
                     found=true;
