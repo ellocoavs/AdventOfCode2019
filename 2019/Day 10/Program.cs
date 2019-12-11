@@ -10,7 +10,7 @@ namespace Day_10
         static void Main(string[] args)
         {
             var input = File.ReadAllLines("input.txt");
-            (int,int)station = (22,17);
+            (int,int)station = (17,22);
 
             // var input = File.ReadAllLines("testinput4.txt");
             // (int,int)station = (11,13);
