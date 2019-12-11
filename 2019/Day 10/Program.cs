@@ -10,9 +10,15 @@ namespace Day_10
         static void Main(string[] args)
         {
             var input = File.ReadAllLines("input.txt");
+            (int,int)station = (22,17);
+
+            //var input = File.ReadAllLines("testinput4.txt");
+            //(int,int)station = (11,13);
+            
+            
             int width = input[0].Length;
             int height = input.Length;
-            (int,int)station = (22,17);
+            
             //Console.WriteLine(width + "," + height);
             List<(int,int)> astroCoords = new List<(int, int)>(); //coordinates of all known astroids x,y
             List<(int,int,double)> seenFromStation = new List<(int,int,double)>(); //list of all astroids visible from station with angle from station 
@@ -32,21 +38,28 @@ namespace Day_10
             {
                 if(coord != station)
                 {
-                    double angle = Math.Atan2(coord.Item1-station.Item1,coord.Item2-station.Item2);
+                    double angle = Math.Atan2(station.Item1-coord.Item1,station.Item2-coord.Item2) ;
                     double distance = GetDistance(coord.Item1,coord.Item2, station.Item1,station.Item2);
-                    bool sameanglecloser = FindSameAngleCloser( angle,  distance, coord, astroCoords);
+                    bool sameanglecloser = FindSameAngleCloser( angle,  distance, station, astroCoords);
                     if (!sameanglecloser)
                     {
                         seenFromStation.Add((coord.Item1,coord.Item2,angle));
                     }
                 }
             }
-            seenFromStation.Sort((x, y) => y.Item3.CompareTo(x.Item3));
+            seenFromStation.Sort((x, y) => (y.Item3*-1).CompareTo(x.Item3*-1));
             foreach ((int,int,double) seenAstro in seenFromStation)
             {
                 Console.WriteLine(seenAstro);
             }
             Console.WriteLine(seenFromStation.Count);
+            Console.WriteLine(station);
+            (int,int) coordtest = (22,12);
+            Console.WriteLine(coordtest);
+            double angletest =  Math.Atan2(station.Item1-coordtest.Item1,station.Item2-coordtest.Item2);
+            Console.WriteLine( angletest);
+         
+
             // foreach ((int,int) coord in astroCoords)
             // {
             //     int seen = 0;
@@ -77,17 +90,17 @@ namespace Day_10
         }
         private static double GetDistance(int x1, int y1, int x2, int y2)
         {
-            return Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
+            return Math.Abs(Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2)));
         }
 
-        public static bool FindSameAngleCloser(double angle, double distance, (int,int) coord,List<(int,int)> astroCoords)
+        public static bool FindSameAngleCloser(double angle, double distance, (int,int) station,List<(int,int)> astroCoords)
         {
             bool found = false;
             foreach ((int,int)other in astroCoords)
             {
-                double otherDist = GetDistance(coord.Item1,coord.Item2,other.Item1,other.Item2);
-                double otherAngle = Math.Atan2(coord.Item1-other.Item1,coord.Item2-other.Item2);
-                if (otherAngle == angle && otherDist < distance && coord != other)
+                double otherDist = GetDistance(station.Item1,station.Item2,other.Item1,other.Item2);
+                double otherAngle = Math.Atan2(station.Item1-other.Item1,station.Item2-other.Item2);
+                if (otherAngle == angle && otherDist < distance && station != other)
                 {
                     found=true;
                 }
