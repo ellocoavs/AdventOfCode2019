@@ -58,7 +58,7 @@ namespace Day_10
             Console.WriteLine(coordtest);
             double angletest =  Math.Atan2(station.Item1-coordtest.Item1,station.Item2-coordtest.Item2);
             Console.WriteLine( angletest);
-         
+            //rechtomhoog zou pi/2 moeten zijn.. niet 0...
 
             // foreach ((int,int) coord in astroCoords)
             // {
@@ -68,9 +68,9 @@ namespace Day_10
             //         if (coord != othercoord) //if not itself
             //         {
             //             //if there isn't an astroid with the same ANGLE (atan2)! and shorter distance, +1 seen.
-            //             double angle = Math.Atan2(coord.Item1-othercoord.Item1,coord.Item2-othercoord.Item2);
+            //             double angle = Math.Atan2(othercoord.Item1-coord.Item1,othercoord.Item2-coord.Item2);
             //             double distance = GetDistance(coord.Item1,coord.Item2, othercoord.Item1,othercoord.Item2);
-            //             bool sameanglecloser = FindSameAngleCloser( angle,  distance, coord, astroCoords);
+            //             bool sameanglecloser = FindSameAngleCloser( angle,  distance, othercoord, astroCoords);
             //             if (!sameanglecloser)
             //             {
             //                 seen++;
@@ -79,10 +79,11 @@ namespace Day_10
             //     }
                 
                     
-            //     if (seen > maxSeen)
+            //     if (seen >= maxSeen)
             //     {
             //         maxSeen=seen;
             //         Console.WriteLine(coord.Item1+","+coord.Item2);
+            //         Console.WriteLine(seen);
             //     } //if bigger than max, save as new max
             // }
             // Console.WriteLine(maxSeen);
