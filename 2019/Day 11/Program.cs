@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace Day_1
+namespace Day_11
 {
     class Program
     {
@@ -15,15 +15,17 @@ namespace Day_1
             public static Int64 relativeBase = 0;
 
             public static int[,] panels = new int[1000,1000];
-            public enum direction
+            public enum directions
             {
                 up,
                 down,
                 left,
                 right
             }
+            directions direction = Globals.directions.up;
             public static (int,int) currentposition = (500,500);
             public static List<int> outputs;
+            public static bool robotStop;
         }
         static void Main(string[] args)
         {
@@ -55,17 +57,41 @@ namespace Day_1
                 if (NumberOfInstructions > 0)
                 {
                     // If instruction = 99 STOP WORKING
+                    int instruction = Globals.outputs[0];
+                    Globals.outputs.RemoveAt(0);
 
+                    if (instruction == 99)
+                    {
+                        Globals.robotStop=true;
+                        break;
+                        ThreadAbortException();
+                    }
 
-                    //process input
+                    // if something else? process input!!
                     if (step == 0)
                     {
                         //PAINT
+                        Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = instruction;
                         step++;
                     }
                     else if (step == 1)
                     {
-                        // TURN AND MOVE
+                        // TURN 
+                        switch (Globals.direction)
+                        {
+                            case up:
+                                break;
+                            case down:
+                                break;
+                            case left:
+                                break;
+
+                            case right:
+                                break;
+                        }
+
+                        //MOVE
+
                         step =0;
                     }
                     
