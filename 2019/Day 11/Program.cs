@@ -22,9 +22,9 @@ namespace Day_11
                 left,
                 right
             }
-            directions direction = Globals.directions.up;
+            public static directions direction = Globals.directions.up;
             public static (int,int) currentposition = (500,500);
-            public static List<int> outputs;
+            public static List<int> outputs = new List<int>();
             public static bool robotStop;
         }
         static void Main(string[] args)
@@ -43,55 +43,70 @@ namespace Day_11
 
                         
             Task task0 = new Task( () => Compute(opcodes));
+            Task task1 = new Task( () => RobotMoves());
             task0.Start();
-
-
+            task1.Start();
+            Task.WaitAll(task0,task1);
         }
         
-        static int RobotMoves()
+        static void RobotMoves()
         {
             int step = 0;
+            Console.WriteLine("Robot about to start moving.");
             while (true)
             {
-                int NumberOfInstructions = Globals.outputs.Capacity;
+                Thread.Sleep(5);
+                int NumberOfInstructions = Globals.outputs.Count;
                 if (NumberOfInstructions > 0)
                 {
+                    Console.WriteLine("Instruction encountered!");
                     // If instruction = 99 STOP WORKING
                     int instruction = Globals.outputs[0];
                     Globals.outputs.RemoveAt(0);
 
                     if (instruction == 99)
                     {
+                        Console.WriteLine("Instruction 99 encountered by robot. Stopping?");
                         Globals.robotStop=true;
                         break;
-                        ThreadAbortException();
                     }
 
                     // if something else? process input!!
                     if (step == 0)
                     {
-                        //PAINT
+                        //PAINT current position in instructed color
+                        Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
                         Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = instruction;
                         step++;
                     }
                     else if (step == 1)
                     {
-                        // TURN 
+                        // TURN  0 = turn left, 1 = turn right
                         switch (Globals.direction)
                         {
-                            case up:
-                                break;
-                            case down:
-                                break;
-                            case left:
+                            case Globals.directions.up:
+                                if (instruction ==0){Globals.direction = Globals.directions.left;}
+                                if (instruction ==1){Globals.direction = Globals.directions.right;}
                                 break;
 
-                            case right:
+                            case Globals.directions.down:
+                                if (instruction ==0){Globals.direction = Globals.directions.right;}
+                                if (instruction ==1){Globals.direction = Globals.directions.left;}
+                                break;
+
+                            case Globals.directions.left:
+                                if (instruction ==0){Globals.direction = Globals.directions.down;}
+                                if (instruction ==1){Globals.direction = Globals.directions.up;}
+                                break;
+
+                            case Globals.directions.right:
+                                if (instruction ==0){Globals.direction = Globals.directions.up;}
+                                if (instruction ==1){Globals.direction = Globals.directions.down;}
                                 break;
                         }
 
                         //MOVE
-
+                        MoveInCurrentDirection();
                         step =0;
                     }
                     
@@ -99,21 +114,48 @@ namespace Day_11
                 else 
                 {   
                     //WAIT FOR INPUT
+                    Console.WriteLine("Waiting for instructions!");
                     Thread.Sleep(5);
                 }
             }
         }
+        static void MoveInCurrentDirection()
+        {
+            Console.WriteLine("About to move towards: " + Globals.direction);
+            switch (Globals.direction)
+                        {
+                            case Globals.directions.up:
+                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2+1);
+                                break;
+
+                            case Globals.directions.down:
+                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2-1);
+                                break;
+
+                            case Globals.directions.left:
+                                Globals.currentposition = (Globals.currentposition.Item1-1, Globals.currentposition.Item2);
+                                break;
+
+                            case Globals.directions.right:
+                                Globals.currentposition = (Globals.currentposition.Item1+1, Globals.currentposition.Item2);
+                                break;
+                        }
+        }
         static int GetInput()
         {
+            Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
             int input = Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2];
+            Console.WriteLine("Input grabbed was: "+input );
             return input;
         }
             
         static void DoOutput(long parameter) 
         {
+            Console.WriteLine("About to output parameter " + parameter + " to robot");
             if (parameter <= 1 | parameter >= 0  | parameter == 99)
             {
                 Globals.outputs.Add((int)parameter);
+                Console.WriteLine("Output succesful.");
             }
             else
             {
@@ -208,10 +250,9 @@ namespace Day_11
                 {
                     //output to queue and PAUSE for a bit. use Thread.Sleep(5); outputprocessor runs parallel.
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    Console.WriteLine(parameter1);
-                    Console.WriteLine("Result stored at position: " + position + " is: " + parameter1);
+                    Console.WriteLine("Result about to be sent to robot from position: " + position + " is: " + parameter1);
                     DoOutput(parameter1);
-                    Thread.Sleep(5);
+                    //Thread.Sleep(5);
                     position += 2;
                 }
                 else if (actualOpcode == 5) //jump-if-true, 2 params
@@ -294,7 +335,7 @@ namespace Day_11
                 }
                 else
                 {
-                    Console.WriteLine("Invalid opcode detected: " + opcodes[position]);
+                    Console.WriteLine("Invalid opcode detected: " + actualOpcode + " at position: " + position);
                 }
 
             }
