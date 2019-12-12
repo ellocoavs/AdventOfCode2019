@@ -141,6 +141,7 @@ namespace Day_11
                                 Globals.currentposition = (Globals.currentposition.Item1+1, Globals.currentposition.Item2);
                                 break;
                         }
+            Console.WriteLine("Now at: " + Globals.currentposition);
         }
         static int GetInput()
         {
@@ -169,6 +170,9 @@ namespace Day_11
         {
             for (Int64 position = 0; ; )
             {
+                Console.WriteLine("Currently instructions in queue: " +  Globals.outputs.Count);
+                Thread.Sleep(50);
+                
                 int rawOpcode = (int)opcodes[position];
                 Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
                 Int64 actualOpcode = opcodes[position] % 100; //last two digits
@@ -249,13 +253,13 @@ namespace Day_11
                     //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
                     position += 2;
                 }
-                else if (actualOpcode == 4) //print what's stored at parameter1
+                else if (actualOpcode == 4) //output what's stored at parameter1
                 {
                     //output to queue and PAUSE for a bit. use Thread.Sleep(5); outputprocessor runs parallel.
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     Console.WriteLine("Result about to be sent to robot from position: " + position + " is: " + parameter1);
                     DoOutput(parameter1);
-                    //Thread.Sleep(5);
+                    Thread.Sleep(50);
                     position += 2;
                 }
                 else if (actualOpcode == 5) //jump-if-true, 2 params
@@ -265,7 +269,7 @@ namespace Day_11
                     //if param 1 true go to param 2 else position += 2;
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    if (parameter1 > 0){position=parameter2;} else {position += 3;}
+                    if (parameter1 != 0){position=parameter2;} else {position += 3;}
                 }
                 else if (actualOpcode == 6) //jump-if-false 2 params
                 {
@@ -344,7 +348,7 @@ namespace Day_11
                 {
                     Console.WriteLine("Invalid opcode detected: " + actualOpcode + " at position: " + position);
                     throw new System.InvalidOperationException("Cannot process opcode: " +actualOpcode);
-                    break;
+                    //break;
                 }
 
             }
