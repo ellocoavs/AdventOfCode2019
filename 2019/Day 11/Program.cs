@@ -31,7 +31,7 @@ namespace Day_11
         {
             var text = File.ReadAllText("input.txt");
             string[] split = text.Split(",");
-            Int64[] opcodes= new Int64[50000000];
+            Int64[] opcodes= new Int64[50000];
             Int64 counter = 0;
             
             foreach (string x in split)
@@ -82,6 +82,7 @@ namespace Day_11
                     else if (step == 1)
                     {
                         // TURN  0 = turn left, 1 = turn right
+                        Console.WriteLine("About turn in  direction: " + instruction);
                         switch (Globals.direction)
                         {
                             case Globals.directions.up:
@@ -168,6 +169,8 @@ namespace Day_11
         {
             for (Int64 position = 0; ; )
             {
+                int rawOpcode = (int)opcodes[position];
+                Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
                 Int64 actualOpcode = opcodes[position] % 100; //last two digits
                 bool isPosMode1 = (opcodes[position] / 100) % 10 == 0; // digit before last two
                 bool isPosMode2 = (opcodes[position] / 1000) % 10 == 0; //digit before last three
@@ -267,11 +270,15 @@ namespace Day_11
                 else if (actualOpcode == 6) //jump-if-false 2 params
                 {
                     //Console.WriteLine(opcodes[opcodes[position+1]]);
-                    //Console.WriteLine("Result stored at position: " + position + " is: " + opcodes[position+3]);
-                    // if param 1 fals go to param 2 else position += 2;
+                    // if param 1 false go to param 2 else position += 2;
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
                     var parameter2 = isPosMode2 ? opcodes[opcodes[position+2]] : isRelMode2 ? opcodes[opcodes[position+2]+Globals.relativeBase] : opcodes[position+2];
-                    if (parameter1 == 0){position=parameter2;} else {position += 3;}
+                    if (parameter1 == 0)
+                    {
+                        
+                        position=parameter2;
+                    } 
+                    else {position += 3;}
                 }
                 else if (actualOpcode == 7) //less than, 3 params
                 {
@@ -336,6 +343,8 @@ namespace Day_11
                 else
                 {
                     Console.WriteLine("Invalid opcode detected: " + actualOpcode + " at position: " + position);
+                    throw new System.InvalidOperationException("Cannot process opcode: " +actualOpcode);
+                    break;
                 }
 
             }
