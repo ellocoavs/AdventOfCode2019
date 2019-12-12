@@ -49,13 +49,29 @@ namespace Day_11
             Task.WaitAll(task0,task1);
         }
         
+        static void PrintWhitePanels()
+        {
+            int result = 0;
+            for (int i =0;i<Globals.panels.GetLength(0);i++)
+            {
+                for (int j =0;j<Globals.panels.GetLength(1);j++)
+                {
+                    if (Globals.panels[j,i]>0)
+                    {
+                        result++;
+                    }
+                }
+            }
+            Console.WriteLine("White panel count is currently: " + result);
+        }
         static void RobotMoves()
         {
             int step = 0;
             Console.WriteLine("Robot about to start moving.");
             while (true)
             {
-                Thread.Sleep(5);
+                //Thread.Sleep(5);
+                PrintWhitePanels();
                 int NumberOfInstructions = Globals.outputs.Count;
                 if (NumberOfInstructions > 0)
                 {
@@ -347,6 +363,7 @@ namespace Day_11
                 else
                 {
                     Console.WriteLine("Invalid opcode detected: " + actualOpcode + " at position: " + position);
+                    
                     throw new System.InvalidOperationException("Cannot process opcode: " +actualOpcode);
                     //break;
                 }
