@@ -14,7 +14,7 @@ namespace Day_11
             public static Int64 input = 2; // 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
-            public static int[,] panels = new int[100,100];
+            public static int[,] panels = new int[50,50];
             public enum directions
             {
                 up,
@@ -23,7 +23,7 @@ namespace Day_11
                 right
             }
             public static directions direction = Globals.directions.up;
-            public static (int,int) currentposition = (50,50);
+            public static (int,int) currentposition = (25,25);
             public static List<int> outputs = new List<int>();
             public static bool robotStop;
         }
@@ -49,6 +49,24 @@ namespace Day_11
             Task.WaitAll(task0,task1);
         }
         
+        static void PrintPanels()
+        {
+            for (int i =0;i<Globals.panels.GetLength(0);i++)
+            {
+                for (int j =0;j<Globals.panels.GetLength(1);j++)
+                {
+                    if ((j,i) == Globals.currentposition){
+                        Console.Write("X");
+                    }
+                    else 
+                    {
+                    Console.Write(Globals.panels[j,i]);
+                    }
+                }
+                Console.WriteLine("");
+            }
+            Console.WriteLine("");
+        }
         static void PrintWhitePanels()
         {
             int result = 0;
@@ -67,7 +85,8 @@ namespace Day_11
         static void RobotMoves()
         {
             int step = 0;
-            Console.WriteLine("Robot about to start moving.");
+            PrintPanels();
+            
             while (true)
             {
                 //Thread.Sleep(5);
@@ -97,6 +116,7 @@ namespace Day_11
                     }
                     else if (step == 1)
                     {
+                        //Console.WriteLine("Robot about to start moving.");
                         // TURN  0 = turn left, 1 = turn right
                         Console.WriteLine("About turn in  direction: " + instruction);
                         switch (Globals.direction)
@@ -126,6 +146,7 @@ namespace Day_11
                         MoveInCurrentDirection();
                         step =0;
                     }
+                    PrintPanels();
                     
                 }
                 else 
@@ -142,11 +163,11 @@ namespace Day_11
             switch (Globals.direction)
                         {
                             case Globals.directions.up:
-                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2+1);
+                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2-1);
                                 break;
 
                             case Globals.directions.down:
-                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2-1);
+                                Globals.currentposition = (Globals.currentposition.Item1, Globals.currentposition.Item2+1);
                                 break;
 
                             case Globals.directions.left:
