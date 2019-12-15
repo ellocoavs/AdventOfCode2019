@@ -14,7 +14,7 @@ namespace Day_11
             public static Int64 input = 2; // 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
-            public static int[,] panels = new int[1000,1000];
+            public static int[,] panels = new int[100,100];
             public enum directions
             {
                 up,
@@ -23,7 +23,7 @@ namespace Day_11
                 right
             }
             public static directions direction = Globals.directions.up;
-            public static (int,int) currentposition = (500,500);
+            public static (int,int) currentposition = (50,50);
             public static List<int> outputs = new List<int>();
             public static bool robotStop;
         }
@@ -170,7 +170,7 @@ namespace Day_11
         static void DoOutput(long parameter) 
         {
             Console.WriteLine("About to output parameter " + parameter + " to robot");
-            if (parameter <= 1 | parameter >= 0  | parameter == 99)
+            if (parameter == 1 | parameter == 0  | parameter == 99)
             {
                 Globals.outputs.Add((int)parameter);
                 Console.WriteLine("Output succesful.");
@@ -333,6 +333,7 @@ namespace Day_11
 
                     if (isPosMode3)
                     {
+                        Console.WriteLine("Saving to positional mode position: " + position + " the value of: " + (parameter1 == parameter2 ? 1  : 0));
                         opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1  : 0;
                     }
                     else if (isRelMode3)
