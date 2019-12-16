@@ -14,7 +14,7 @@ namespace Day_11
             public static Int64 input = 2; // Unused in Day 11. 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
-            public static int[,] panels = new int[50,50];
+            public static int[,] panels = new int[100,100];
             public enum directions
             {
                 up,
@@ -23,9 +23,10 @@ namespace Day_11
                 right
             }
             public static directions direction = Globals.directions.up;
-            public static (int,int) currentposition = (25,25);
+            public static (int,int) currentposition = (50,50);
             public static List<int> outputs = new List<int>();
             public static bool robotStop;
+            public static HashSet<(int,int)> PaintedPanels = new HashSet<(int,int)>();
         }
         static void Main(string[] args)
         {
@@ -45,6 +46,7 @@ namespace Day_11
             task0.Start();
             task1.Start();
             Task.WaitAll(task0,task1);
+            Console.WriteLine("The number of panels that was painted at least once is: "+ Globals.PaintedPanels.Count);
         }
         
         static void PrintPanels() //Helps with debugging behaviour of robot (moving,painting)
@@ -65,34 +67,20 @@ namespace Day_11
             }
             Console.WriteLine("");
         }
-        static void PrintWhitePanels() //This needs to be fixed to count each panel that gets painted ONCE, instead of just counting white panels.
-        {
-            int result = 0;
-            for (int i =0;i<Globals.panels.GetLength(0);i++)
-            {
-                for (int j =0;j<Globals.panels.GetLength(1);j++)
-                {
-                    if (Globals.panels[j,i]>0)
-                    {
-                        result++;
-                    }
-                }
-            }
-            Console.WriteLine("White panel count is currently: " + result);
-        }
+
         static void RobotMoves()  //This loops grabs input, paints, turns and moves. uses step integer to know if it's on a painting instruction or not
         {
             int step = 0;
-            PrintPanels();
+            //PrintPanels();
             
             while (true)
             {
                 //Thread.Sleep(5);
-                PrintWhitePanels();
+                
                 int NumberOfInstructions = Globals.outputs.Count;
                 if (NumberOfInstructions > 0)
                 {
-                    Console.WriteLine("Instruction encountered!");
+                    //Console.WriteLine("Instruction encountered!");
                     // If instruction = 99 STOP WORKING
                     int instruction = Globals.outputs[0];
                     Globals.outputs.RemoveAt(0);
@@ -108,15 +96,16 @@ namespace Day_11
                     if (step == 0)
                     {
                         //stop 0 is PAINT current position in instructed color and go to step 1
-                        Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
+                      //  Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
                         Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = instruction;
+                        Globals.PaintedPanels.Add(Globals.currentposition);
                         step++;
                     }
                     else if (step == 1)
                     {   //step 1 is move and go back to step 0
                         //Console.WriteLine("Robot about to start moving.");
                         // TURN  0 = turn left, 1 = turn right
-                        Console.WriteLine("About turn in  direction: " + instruction);
+                       // Console.WriteLine("About turn in  direction: " + instruction);
                         switch (Globals.direction)
                         {
                             case Globals.directions.up:
@@ -144,20 +133,20 @@ namespace Day_11
                         MoveInCurrentDirection();
                         step =0;
                     }
-                    PrintPanels();
+                   // PrintPanels();
                     
                 }
                 else 
                 {   
                     //WAIT FOR INPUT
-                    Console.WriteLine("Waiting for instructions!");
-                    Thread.Sleep(5); //slowing down a little?
+                    //Console.WriteLine("Waiting for instructions!");
+                    Thread.Sleep(1); //slowing down a little?
                 }
             }
         }
         static void MoveInCurrentDirection() //moves toward current direction
         {
-            Console.WriteLine("About to move towards: " + Globals.direction);
+            //Console.WriteLine("About to move towards: " + Globals.direction);
             switch (Globals.direction)
                         {
                             case Globals.directions.up:
@@ -176,23 +165,23 @@ namespace Day_11
                                 Globals.currentposition = (Globals.currentposition.Item1+1, Globals.currentposition.Item2);
                                 break;
                         }
-            Console.WriteLine("Now at: " + Globals.currentposition);
+           // Console.WriteLine("Now at: " + Globals.currentposition);
         }
         static int GetInput() //grabs value from current position of robot and returns
         {
-            Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
+            //Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
             int input = Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2];
-            Console.WriteLine("Input grabbed was: "+input );
+           // Console.WriteLine("Input grabbed was: "+input );
             return input;
         }
             
         static void DoOutput(long parameter)  //outputs parameter to the queue for the robot
         {
-            Console.WriteLine("About to output parameter " + parameter + " to robot");
+           // Console.WriteLine("About to output parameter " + parameter + " to robot");
             if (parameter == 1 | parameter == 0  | parameter == 99)
             {
                 Globals.outputs.Add((int)parameter);
-                Console.WriteLine("Output succesful.");
+              //  Console.WriteLine("Output succesful.");
             }
             else
             {
@@ -205,11 +194,11 @@ namespace Day_11
         {
             for (Int64 position = 0; ; )
             {
-                Console.WriteLine("Currently instructions in queue: " +  Globals.outputs.Count);
-                Thread.Sleep(50);
+                //Console.WriteLine("Currently instructions in queue: " +  Globals.outputs.Count);
+                Thread.Sleep(10);
                 
                 int rawOpcode = (int)opcodes[position];
-                Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
+                //Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
                 Int64 actualOpcode = opcodes[position] % 100; //last two digits
                 bool isPosMode1 = (opcodes[position] / 100) % 10 == 0; // digit before last two
                 bool isPosMode2 = (opcodes[position] / 1000) % 10 == 0; //digit before last three
@@ -235,7 +224,7 @@ namespace Day_11
                     {
                         opcodes[opcodes[position+3]] = parameter1 + parameter2;
                     }
-                    if (isRelMode3)
+                    else if (isRelMode3)
                     {
                         opcodes[opcodes[position+3]+Globals.relativeBase] = parameter1 + parameter2;
                     }
@@ -269,7 +258,7 @@ namespace Day_11
                 else if (actualOpcode == 3) //only one parameter. grab input from user and store at parameter
                 {
                     //CHANGE TO GRAB INPUT FROM camera, make method GetInput (save GetInput result in local var then use.)
-                    Thread.Sleep(5);
+                    Thread.Sleep(10);
                     int input =  GetInput();
                     if (isPosMode1)
                     {
@@ -292,9 +281,9 @@ namespace Day_11
                 {
                     //output to queue and PAUSE for a bit. use Thread.Sleep(5); outputprocessor runs parallel.
                     var parameter1 = isPosMode1 ? opcodes[opcodes[position+1]] : isRelMode1 ? opcodes[opcodes[position+1]+Globals.relativeBase] : opcodes[position+1];
-                    Console.WriteLine("Result about to be sent to robot from position: " + position + " is: " + parameter1);
+                    //Console.WriteLine("Result about to be sent to robot from position: " + position + " is: " + parameter1);
                     DoOutput(parameter1);
-                    Thread.Sleep(50);
+                    Thread.Sleep(25);
                     position += 2;
                 }
                 else if (actualOpcode == 5) //jump-if-true, 2 params
@@ -352,7 +341,7 @@ namespace Day_11
 
                     if (isPosMode3)
                     {
-                        Console.WriteLine("Saving to positional mode position: " + position + " the value of: " + (parameter1 == parameter2 ? 1  : 0));
+                        //Console.WriteLine("Saving to positional mode position: " + position + " the value of: " + (parameter1 == parameter2 ? 1  : 0));
                         opcodes[opcodes[position+3]] = parameter1 == parameter2 ? 1  : 0;
                     }
                     else if (isRelMode3)
