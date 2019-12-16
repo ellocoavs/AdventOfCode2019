@@ -11,7 +11,7 @@ namespace Day_11
     {
         public static class Globals
         {
-            public static Int64 input = 2; // 1 is test mode, 2 is boost mode
+            public static Int64 input = 2; // Unused in Day 11. 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
             public static int[,] panels = new int[50,50];
@@ -39,9 +39,7 @@ namespace Day_11
                 opcodes[counter] =Int64.Parse(x);
                 counter++;
             }
-            //Array.Copy(original,opcodes,1000000);
-
-                        
+                                    
             Task task0 = new Task( () => Compute(opcodes));
             Task task1 = new Task( () => RobotMoves());
             task0.Start();
@@ -49,7 +47,7 @@ namespace Day_11
             Task.WaitAll(task0,task1);
         }
         
-        static void PrintPanels()
+        static void PrintPanels() //Helps with debugging behaviour of robot (moving,painting)
         {
             for (int i =0;i<Globals.panels.GetLength(0);i++)
             {
@@ -67,7 +65,7 @@ namespace Day_11
             }
             Console.WriteLine("");
         }
-        static void PrintWhitePanels()
+        static void PrintWhitePanels() //This needs to be fixed to count each panel that gets painted ONCE, instead of just counting white panels.
         {
             int result = 0;
             for (int i =0;i<Globals.panels.GetLength(0);i++)
@@ -82,7 +80,7 @@ namespace Day_11
             }
             Console.WriteLine("White panel count is currently: " + result);
         }
-        static void RobotMoves()
+        static void RobotMoves()  //This loops grabs input, paints, turns and moves. uses step integer to know if it's on a painting instruction or not
         {
             int step = 0;
             PrintPanels();
@@ -109,13 +107,13 @@ namespace Day_11
                     // if something else? process input!!
                     if (step == 0)
                     {
-                        //PAINT current position in instructed color
+                        //stop 0 is PAINT current position in instructed color and go to step 1
                         Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
                         Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = instruction;
                         step++;
                     }
                     else if (step == 1)
-                    {
+                    {   //step 1 is move and go back to step 0
                         //Console.WriteLine("Robot about to start moving.");
                         // TURN  0 = turn left, 1 = turn right
                         Console.WriteLine("About turn in  direction: " + instruction);
@@ -153,11 +151,11 @@ namespace Day_11
                 {   
                     //WAIT FOR INPUT
                     Console.WriteLine("Waiting for instructions!");
-                    Thread.Sleep(5);
+                    Thread.Sleep(5); //slowing down a little?
                 }
             }
         }
-        static void MoveInCurrentDirection()
+        static void MoveInCurrentDirection() //moves toward current direction
         {
             Console.WriteLine("About to move towards: " + Globals.direction);
             switch (Globals.direction)
@@ -180,7 +178,7 @@ namespace Day_11
                         }
             Console.WriteLine("Now at: " + Globals.currentposition);
         }
-        static int GetInput()
+        static int GetInput() //grabs value from current position of robot and returns
         {
             Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
             int input = Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2];
@@ -188,7 +186,7 @@ namespace Day_11
             return input;
         }
             
-        static void DoOutput(long parameter) 
+        static void DoOutput(long parameter)  //outputs parameter to the queue for the robot
         {
             Console.WriteLine("About to output parameter " + parameter + " to robot");
             if (parameter == 1 | parameter == 0  | parameter == 99)
