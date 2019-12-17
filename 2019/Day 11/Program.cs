@@ -80,7 +80,7 @@ namespace Day_11
                 int NumberOfInstructions = Globals.outputs.Count;
                 if (NumberOfInstructions > 0)
                 {
-                    //Console.WriteLine("Instruction encountered!");
+                    Console.WriteLine("Instruction encountered!");
                     // If instruction = 99 STOP WORKING
                     int instruction = Globals.outputs[0];
                     Globals.outputs.RemoveAt(0);
@@ -96,7 +96,7 @@ namespace Day_11
                     if (step == 0)
                     {
                         //stop 0 is PAINT current position in instructed color and go to step 1
-                      //  Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
+                        Console.WriteLine("About to paint something "+instruction + " at position: " + Globals.currentposition);
                         Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = instruction;
                         Globals.PaintedPanels.Add(Globals.currentposition);
                         step++;
@@ -105,7 +105,7 @@ namespace Day_11
                     {   //step 1 is move and go back to step 0
                         //Console.WriteLine("Robot about to start moving.");
                         // TURN  0 = turn left, 1 = turn right
-                       // Console.WriteLine("About turn in  direction: " + instruction);
+                        Console.WriteLine("About turn in  direction: " + instruction);
                         switch (Globals.direction)
                         {
                             case Globals.directions.up:
@@ -165,19 +165,19 @@ namespace Day_11
                                 Globals.currentposition = (Globals.currentposition.Item1+1, Globals.currentposition.Item2);
                                 break;
                         }
-           // Console.WriteLine("Now at: " + Globals.currentposition);
+            Console.WriteLine("Now at: " + Globals.currentposition);
         }
         static int GetInput() //grabs value from current position of robot and returns
         {
             //Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
             int input = Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2];
-           // Console.WriteLine("Input grabbed was: "+input );
+            Console.WriteLine("Input grabbed was: "+input );
             return input;
         }
             
         static void DoOutput(long parameter)  //outputs parameter to the queue for the robot
         {
-           // Console.WriteLine("About to output parameter " + parameter + " to robot");
+            Console.WriteLine("About to output parameter " + parameter + " to robot");
             if (parameter == 1 | parameter == 0  | parameter == 99)
             {
                 Globals.outputs.Add((int)parameter);
@@ -198,7 +198,7 @@ namespace Day_11
                 Thread.Sleep(10);
                 
                 int rawOpcode = (int)opcodes[position];
-                //Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
+                Console.WriteLine("Processing raw opcode: " + rawOpcode + " at position: " + position);
                 Int64 actualOpcode = opcodes[position] % 100; //last two digits
                 bool isPosMode1 = (opcodes[position] / 100) % 10 == 0; // digit before last two
                 bool isPosMode2 = (opcodes[position] / 1000) % 10 == 0; //digit before last three
