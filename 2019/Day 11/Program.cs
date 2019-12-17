@@ -14,7 +14,7 @@ namespace Day_11
             public static Int64 input = 2; // Unused in Day 11. 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
-            public static int[,] panels = new int[10000,10000];
+            public static int[,] panels = new int[50,50];
             public enum directions
             {
                 up,
@@ -23,10 +23,10 @@ namespace Day_11
                 right
             }
             public static directions direction = Globals.directions.up;
-            public static (int,int) currentposition = (5000,5000);
+            public static (int,int) currentposition = (0,0);
             public static List<int> outputs = new List<int>();
             public static bool robotStop;
-            public static HashSet<(int,int)> PaintedPanels = new HashSet<(int,int)>();
+            public static List<(int,int)> PaintedPanels = new List<(int,int)>();
         }
         static void Main(string[] args)
         {
@@ -40,34 +40,60 @@ namespace Day_11
                 opcodes[counter] =Int64.Parse(x);
                 counter++;
             }
-                                    
+            //Starting at a white panel for part 2
+            Globals.panels[Globals.currentposition.Item1,Globals.currentposition.Item2] = 1;
+
             Task task0 = new Task( () => Compute(opcodes));
             Task task1 = new Task( () => RobotMoves());
             task0.Start();
             task1.Start();
             Task.WaitAll(task0,task1);
             Console.WriteLine("The number of panels that was painted at least once is: "+ Globals.PaintedPanels.Count);
+            Console.WriteLine("minX,maxX,minY,maxY is: " + FindMinMax());
+            PrintPanels();
         }
-        
         static void PrintPanels() //Helps with debugging behaviour of robot (moving,painting)
         {
             for (int i =0;i<Globals.panels.GetLength(0);i++)
             {
                 for (int j =0;j<Globals.panels.GetLength(1);j++)
                 {
-                    if ((j,i) == Globals.currentposition){
-                        Console.Write("X");
+                    //if ((j,i) == Globals.currentposition){
+                      //  Console.Write("X");
+                    //}
+                    //else 
+                    //{
+                    if (Globals.panels[j,i] == 1){
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
-                    else 
+                    else if (Globals.panels[j,i] ==0)
                     {
-                    Console.Write(Globals.panels[j,i]);
+                        Console.ForegroundColor = ConsoleColor.Black;
                     }
+
+                    Console.Write(Globals.panels[j,i]);
+                    //}
                 }
                 Console.WriteLine("");
             }
             Console.WriteLine("");
         }
 
+        static (int,int,int,int) FindMinMax()
+        {
+            int minX = 0;
+            int minY = 0;
+            int maxX = 0;
+            int maxY = 0;
+            foreach ((int,int) panel in Globals.PaintedPanels)
+            {
+                if (panel.Item1 > maxX) {maxX =panel.Item1;}
+                if (panel.Item1 < minX) {minX =panel.Item1;}
+                if (panel.Item2 > maxY) {maxY =panel.Item1;}
+                if (panel.Item2 < minY) {minY =panel.Item1;}
+            }
+            return(minX,maxX,minY,maxY);
+        }
         static void RobotMoves()  //This loops grabs input, paints, turns and moves. uses step integer to know if it's on a painting instruction or not
         {
             int step = 0;
@@ -80,7 +106,7 @@ namespace Day_11
                 int NumberOfInstructions = Globals.outputs.Count;
                 if (NumberOfInstructions > 0)
                 {
-                    Console.WriteLine("Instruction encountered!");
+                    //Console.WriteLine("Instruction encountered!");
                     // If instruction = 99 STOP WORKING
                     int instruction = Globals.outputs[0];
                     Globals.outputs.RemoveAt(0);
@@ -105,7 +131,7 @@ namespace Day_11
                     {   //step 1 is move and go back to step 0
                         //Console.WriteLine("Robot about to start moving.");
                         // TURN  0 = turn left, 1 = turn right
-                        Console.WriteLine("About turn in  direction: " + instruction);
+                        //Console.WriteLine("About turn in  direction: " + instruction);
                         switch (Globals.direction)
                         {
                             case Globals.directions.up:
@@ -177,7 +203,7 @@ namespace Day_11
             
         static void DoOutput(long parameter)  //outputs parameter to the queue for the robot
         {
-            Console.WriteLine("About to output parameter " + parameter + " to robot");
+            //Console.WriteLine("About to output parameter " + parameter + " to robot");
             if (parameter == 1 | parameter == 0  | parameter == 99)
             {
                 Globals.outputs.Add((int)parameter);
