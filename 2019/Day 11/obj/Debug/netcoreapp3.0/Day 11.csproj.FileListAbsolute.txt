@@ -20,3 +20,14 @@ f:\Personal Repos\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.As
 f:\Personal Repos\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.AssemblyInfo.cs
 f:\Personal Repos\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.dll
 f:\Personal Repos\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.pdb
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.exe
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.deps.json
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.runtimeconfig.json
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.runtimeconfig.dev.json
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.dll
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\bin\Debug\netcoreapp3.0\Day 11.pdb
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.csprojAssemblyReference.cache
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.AssemblyInfoInputs.cache
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.AssemblyInfo.cs
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.dll
+C:\Users\el_loco_avs\Desktop\C#\AdventOfCode2019\2019\Day 11\obj\Debug\netcoreapp3.0\Day 11.pdb

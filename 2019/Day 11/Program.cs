@@ -14,7 +14,7 @@ namespace Day_11
             public static Int64 input = 2; // Unused in Day 11. 1 is test mode, 2 is boost mode
             public static Int64 relativeBase = 0;
 
-            public static int[,] panels = new int[100,100];
+            public static int[,] panels = new int[10000,10000];
             public enum directions
             {
                 up,
@@ -23,7 +23,7 @@ namespace Day_11
                 right
             }
             public static directions direction = Globals.directions.up;
-            public static (int,int) currentposition = (50,50);
+            public static (int,int) currentposition = (5000,5000);
             public static List<int> outputs = new List<int>();
             public static bool robotStop;
             public static HashSet<(int,int)> PaintedPanels = new HashSet<(int,int)>();
@@ -372,7 +372,7 @@ namespace Day_11
                 else
                 {
                     Console.WriteLine("Invalid opcode detected: " + actualOpcode + " at position: " + position);
-                    
+                    DoOutput(99);
                     throw new System.InvalidOperationException("Cannot process opcode: " +actualOpcode);
                     //break;
                 }
