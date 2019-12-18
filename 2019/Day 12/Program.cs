@@ -15,7 +15,7 @@ namespace Day_12
         }
         static void Main(string[] args)
         {
-            long NumberOfSteps = 4686774924;
+            long NumberOfSteps = 3000;
             InitPlanets();
 
             Console.WriteLine("Position and speed at start");
@@ -26,7 +26,11 @@ namespace Day_12
                 //Console.WriteLine("Cycle number: "+i);
                 
                 DoCycle();
-                PrintCurrentPositionAndSpeed(i);
+                bool stop = PrintCurrentPositionAndSpeed(i);
+                if (stop==true){
+                    Console.WriteLine("Midwaypoint found!");
+                    break;
+                }
                 //Console.WriteLine("");
             }
 
@@ -52,7 +56,7 @@ namespace Day_12
             int sum = energies.Take(Globals.planets.Count).Sum(); // Now sum all total moon energies for total system energy
             return sum;
         }
-        static void PrintCurrentPositionAndSpeed(long cycle)
+        static bool PrintCurrentPositionAndSpeed(long cycle)
         {
             if ( Globals.planets[0] == Globals.initialplanets[0] &&
                 Globals.planets[1] == Globals.initialplanets[1] &&
@@ -76,8 +80,10 @@ namespace Day_12
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
-                        }                            
+                        }   
+                    return true;
             }
+            return false;
         }
         static void InitPlanets() //the puzzle input
         {
@@ -88,16 +94,16 @@ namespace Day_12
             // Globals.planets.Add((3,7,-4));
 
             //test input
-            // Globals.planets.Add((-1,0,2));
-            // Globals.planets.Add((2,-10,-7));
-            // Globals.planets.Add((4,-8,8));
-            // Globals.planets.Add((3,5,-1));
+            Globals.planets.Add((-1,0,2));
+            Globals.planets.Add((2,-10,-7));
+            Globals.planets.Add((4,-8,8));
+            Globals.planets.Add((3,5,-1));
 
             //test input 2
-            Globals.planets.Add((-8,-10,0));
-            Globals.planets.Add((5,5,10));
-            Globals.planets.Add((2,-7,3));
-            Globals.planets.Add((9,-8,-3));
+            // Globals.planets.Add((-8,-10,0));
+            // Globals.planets.Add((5,5,10));
+            // Globals.planets.Add((2,-7,3));
+            // Globals.planets.Add((9,-8,-3));
 
             Globals.initialplanets = Globals.planets.ToList();
             //initial speed =0
