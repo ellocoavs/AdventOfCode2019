@@ -46,39 +46,24 @@ namespace RectanglesEx
             //loop throuh matrix with values here
             //g.Clear(SystemColors.Control); 
             //g.FillRectangle(Brushes.Sienna, 10, 15, 90, 60);
-            while (true){
-                for (int i=0; i<Globals.grid.GetUpperBound(0);i++)
-                {
-                    for (int j=0; j<Globals.grid.GetUpperBound(1);j++)
-                    {
-                        if (Globals.grid[j,i]>0) 
-                            {
-                                //Console.WriteLine("Drawing something?");
-                                Pen pen = new Pen(Color.Red, 1);
-                                Rectangle rect = new Rectangle(new Point(step * j, step * i), new Size(width, height));
-                                g.DrawRectangle(pen, rect);
-                                g.FillRectangle(System.Drawing.Brushes.Red, rect);
+            // while (true){
+            //     for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
+            //     {
+            //         for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
+            //         {
+            //             if (Globals.grid[j,i]>0)  //MAKE INTO FUNCTION
+            //                 {
+            //                     //Console.WriteLine("Drawing something?");
+            //                     Pen pen = new Pen(Color.Red, 1);
+            //                     Rectangle rect = new Rectangle(new Point(step * j, step * i), new Size(width, height));
+            //                     g.DrawRectangle(pen, rect);
+            //                     g.FillRectangle(System.Drawing.Brushes.Red, rect);
                                 
-                            }
-                    }
-                }
-            }
-
-
-
-
-
-
-
-            // g.FillRectangle(Brushes.Sienna, 10, 15, 90, 60);
-            // g.FillRectangle(Brushes.Green, 130, 15, 90, 60);
-            // g.FillRectangle(Brushes.Maroon, 250, 15, 90, 60);
-            // g.FillRectangle(Brushes.Chocolate, 10, 105, 90, 60);
-            // g.FillRectangle(Brushes.Gray, 130, 105, 90, 60);
-            // g.FillRectangle(Brushes.Coral, 250, 105, 90, 60);
-            // g.FillRectangle(Brushes.Brown, 10, 195, 90, 60);
-            // g.FillRectangle(Brushes.Teal, 130, 195, 90, 60);
-            // g.FillRectangle(Brushes.Goldenrod, 250, 195, 90, 60);
+            //                 }
+            //         }
+            //     }
+            //     Thread.Sleep(100);
+            // }
         }
 
         [STAThread]
@@ -105,12 +90,24 @@ namespace RectanglesEx
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             //Task task3 = new Task( () => Application.Run(new Program()));
-            Application.Run(new Program());
+            //Application.Run(new Program());
 
           
             
             
-            Task.WaitAll(task0,task2);
+            Task.WaitAll(task0);
+            int countBlocks = 0;
+            for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
+                {
+                    for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
+                    {
+                        if (Globals.grid[j,i]==2) 
+                            {
+                                countBlocks++;
+                            }
+                    }
+                }
+            Console.WriteLine("Number of Blocks is: " +countBlocks);
         }
           
         static int GetInput() //grabs value from current position of robot and returns
