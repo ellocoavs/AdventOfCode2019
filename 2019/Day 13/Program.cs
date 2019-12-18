@@ -3,6 +3,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using Stackoverflow;
 
 //https://stackoverflow.com/questions/11312980/2d-array-of-rectangleshapes
 

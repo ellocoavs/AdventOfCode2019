@@ -1,0 +1,67 @@
+{
+  "format": 1,
+  "restore": {
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {}
+  },
+  "projects": {
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
+        "projectName": "day13viz",
+        "projectPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
+        "packagesPath": "C:\\Users\\snappet\\.nuget\\packages\\",
+        "outputPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\snappet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
