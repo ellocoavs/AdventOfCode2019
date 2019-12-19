@@ -45,26 +45,17 @@ namespace RectanglesEx
              
             
             while (true){
-                //g.Clear(SystemColors.Control);
+                g.Clear(SystemColors.Control);
                 for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
                 {
                     for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
                     {
-                        // if (Globals.grid[j,i]>0)  //MAKE INTO FUNCTION
-                        //     {
-                        //         //Console.WriteLine("Drawing something?");
-                        //         Pen pen = new Pen(Color.Red, 1);
-                        //         Rectangle rect = new Rectangle(new Point(step * j, step * i), new Size(width, height));
-                        //         g.DrawRectangle(pen, rect);
-                        //         g.FillRectangle(System.Drawing.Brushes.Red, rect);
-                                
-                        //     }
                         int currentgridpoint = Globals.grid[j,i];
                         DrawPoint(j,i,currentgridpoint,g);
 
                     }
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(10);
             }
         }
 
@@ -138,12 +129,8 @@ namespace RectanglesEx
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            //Task task3 = new Task( () => Application.Run(new Program()));
             Application.Run(new Program());
 
-          
-            
-            
             Task.WaitAll(task0);
             int countBlocks = 0;
             for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
@@ -161,8 +148,36 @@ namespace RectanglesEx
           
         static int GetInput() //grabs value from current position of robot and returns
         {
-            //should be returning keyboard input at some points
-            return 0;
+            // to vars to store important positions
+            int ballx=0;
+            int paddlex=0;
+
+            //grab ball and paddle positions from grid
+            for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
+                {
+                    for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
+                    {
+                        if (Globals.grid[j,i]==3) 
+                            {
+                                paddlex=j;
+                            }
+                        if (Globals.grid[j,i]==4) 
+                            {
+                                ballx=j;
+                            }
+                        
+                    }
+                }
+
+            
+            //if ball left of paddle -> -1 to make paddle to left
+            if (ballx < paddlex){return -1;}
+
+            //if ball right of paddle -> 1 to make paddle to right
+            if (ballx > paddlex){return 1;}
+            //else 0 to stay where we are
+            else {return 0;}
+            
         }
 
         static void UpdateGrid() //maybe change Grid to List?
@@ -184,12 +199,13 @@ namespace RectanglesEx
                     Globals.outputs.RemoveAt(0);
 
                     //TODO HANDLE x = -1 and SKIP LE GRID but print LE SCORE
-                    if (id > 4)//invalid id!
+                    if (x < 0){ Console.WriteLine("Current score is: " + id);}
+                    else if (id > 4)//invalid id!
                     {
                         Console.WriteLine("Invalid id encountered by Grid. Stopping due to id: "+ id);
                         //Globals.drawStop=true;
                         break;
-                    }
+                    } 
                     else {//TODO now put id into grid at x,y
                     Globals.grid[x,y]= id;
                     }
