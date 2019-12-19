@@ -15,7 +15,7 @@ namespace Day_12
         }
         static void Main(string[] args)
         {
-            long NumberOfSteps = 100000;
+            long NumberOfSteps = 500;
             InitPlanets();
 
             Console.WriteLine("Position and speed at start");
@@ -105,7 +105,7 @@ namespace Day_12
                 Globals.planets[2].Item3 == Globals.initialplanets[2].Item3 &&
                 Globals.planets[3].Item3 == Globals.initialplanets[3].Item3)  
             {
-                    Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Y");
+                    Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Z");
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);

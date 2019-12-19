@@ -9,3 +9,14 @@ C:\GitProjects\AdventOfCode\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.AssemblyI
 C:\GitProjects\AdventOfCode\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.AssemblyInfo.cs
 C:\GitProjects\AdventOfCode\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.dll
 C:\GitProjects\AdventOfCode\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.pdb
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.exe
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.deps.json
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.runtimeconfig.json
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.runtimeconfig.dev.json
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.dll
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\bin\Debug\netcoreapp3.0\Day 12.pdb
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.csprojAssemblyReference.cache
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.AssemblyInfoInputs.cache
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.AssemblyInfo.cs
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.dll
+F:\Personal Repos\AdventOfCode2019\2019\Day 12\obj\Debug\netcoreapp3.0\Day 12.pdb
