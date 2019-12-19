@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj": {}
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj": {}
   },
   "projects": {
-    "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj": {
+    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj",
+        "projectUniqueName": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj",
         "projectName": "Day 12",
-        "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj",
-        "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
-        "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\obj\\",
+        "projectPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj",
+        "packagesPath": "C:\\Users\\snappet\\.nuget\\packages\\",
+        "outputPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\snappet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.0": {
@@ -45,12 +51,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.0.0, 3.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -15,7 +15,7 @@ namespace Day_12
         }
         static void Main(string[] args)
         {
-            long NumberOfSteps = 3000;
+            long NumberOfSteps = 100000;
             InitPlanets();
 
             Console.WriteLine("Position and speed at start");
@@ -28,7 +28,7 @@ namespace Day_12
                 DoCycle();
                 bool stop = PrintCurrentPositionAndSpeed(i);
                 if (stop==true){
-                    Console.WriteLine("Midwaypoint found!");
+                    Console.WriteLine("All three axis looped!");
                     break;
                 }
                 //Console.WriteLine("");
@@ -58,6 +58,10 @@ namespace Day_12
         }
         static bool PrintCurrentPositionAndSpeed(long cycle)
         {
+            bool xBackHome = false;
+            bool yBackHome = false;
+            bool zBackHome = false;
+
             if ( Globals.planets[0] == Globals.initialplanets[0] &&
                 Globals.planets[1] == Globals.initialplanets[1] &&
                 Globals.planets[2] == Globals.initialplanets[2] &&
@@ -70,18 +74,47 @@ namespace Day_12
                         }                            
             }
 
-            if ( Globals.velocities[0] == (0,0,0) &&
-                Globals.velocities[1] == (0,0,0) &&
-                Globals.velocities[2] == (0,0,0) &&
-                Globals.velocities[3] == (0,0,0))  
+            if (Globals.planets[0].Item1 == Globals.initialplanets[0].Item1 &&
+                Globals.planets[1].Item1 == Globals.initialplanets[1].Item1 &&
+                Globals.planets[2].Item1 == Globals.initialplanets[2].Item1 &&
+                Globals.planets[3].Item1 == Globals.initialplanets[3].Item1)  
             {
-                //standstill (cycle +1 )x2
-                    Console.WriteLine("During cycle " + cycle + " there was a return to return to standstill");
+                    Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate X");
+                    for (int i=0; i<Globals.planets.Count;i++)
+                        {
+                            Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
+                        }         
+                xBackHome=true;                   
+            }
+            
+            if (Globals.planets[0].Item2 == Globals.initialplanets[0].Item2 &&
+                Globals.planets[1].Item2 == Globals.initialplanets[1].Item2 &&
+                Globals.planets[2].Item2 == Globals.initialplanets[2].Item2 &&
+                Globals.planets[3].Item2 == Globals.initialplanets[3].Item2)  
+            {
+                    Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Y");
+                    for (int i=0; i<Globals.planets.Count;i++)
+                        {
+                            Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
+                        }  
+                yBackHome=true;                            
+            }
+
+            if (Globals.planets[0].Item3 == Globals.initialplanets[0].Item3 &&
+                Globals.planets[1].Item3 == Globals.initialplanets[1].Item3 &&
+                Globals.planets[2].Item3 == Globals.initialplanets[2].Item3 &&
+                Globals.planets[3].Item3 == Globals.initialplanets[3].Item3)  
+            {
+                    Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Y");
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
                         }   
-                    return true;
+                zBackHome=true;                           
+            }
+            if (xBackHome==true && yBackHome == true && zBackHome == true)
+            {
+                return true;
             }
             return false;
         }
