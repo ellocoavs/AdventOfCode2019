@@ -12,10 +12,13 @@ namespace Day_12
             public static List<(int,int,int)> planets = new List<(int, int, int)>();
             public static List<(int,int,int)> initialplanets;
             public static List<(int,int,int)> velocities = new List<(int, int, int)>();
+            public static bool xBackHome = false;
+            public static bool yBackHome = false;
+            public static bool zBackHome = false;
         }
         static void Main(string[] args)
         {
-            long NumberOfSteps = 500;
+            long NumberOfSteps = 50000;
             InitPlanets();
 
             Console.WriteLine("Position and speed at start");
@@ -58,10 +61,6 @@ namespace Day_12
         }
         static bool PrintCurrentPositionAndSpeed(long cycle)
         {
-            bool xBackHome = false;
-            bool yBackHome = false;
-            bool zBackHome = false;
-
             if ( Globals.planets[0] == Globals.initialplanets[0] &&
                 Globals.planets[1] == Globals.initialplanets[1] &&
                 Globals.planets[2] == Globals.initialplanets[2] &&
@@ -77,42 +76,57 @@ namespace Day_12
             if (Globals.planets[0].Item1 == Globals.initialplanets[0].Item1 &&
                 Globals.planets[1].Item1 == Globals.initialplanets[1].Item1 &&
                 Globals.planets[2].Item1 == Globals.initialplanets[2].Item1 &&
-                Globals.planets[3].Item1 == Globals.initialplanets[3].Item1)  
+                Globals.planets[3].Item1 == Globals.initialplanets[3].Item1 &&
+                Globals.velocities[0].Item1 == 0 &&
+                Globals.velocities[1].Item1 == 0 &&
+                Globals.velocities[2].Item1 == 0 &&
+                Globals.velocities[3].Item1 == 0 &&
+                cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate X");
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
                         }         
-                xBackHome=true;                   
+                Globals.xBackHome=true;                   
             }
             
             if (Globals.planets[0].Item2 == Globals.initialplanets[0].Item2 &&
                 Globals.planets[1].Item2 == Globals.initialplanets[1].Item2 &&
                 Globals.planets[2].Item2 == Globals.initialplanets[2].Item2 &&
-                Globals.planets[3].Item2 == Globals.initialplanets[3].Item2)  
+                Globals.planets[3].Item2 == Globals.initialplanets[3].Item2 &&
+                Globals.velocities[0].Item2 == 0 &&
+                Globals.velocities[1].Item2 == 0 &&
+                Globals.velocities[2].Item2 == 0 &&
+                Globals.velocities[3].Item2 == 0 &&
+                cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Y");
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
                         }  
-                yBackHome=true;                            
+                Globals.yBackHome=true;                            
             }
 
             if (Globals.planets[0].Item3 == Globals.initialplanets[0].Item3 &&
                 Globals.planets[1].Item3 == Globals.initialplanets[1].Item3 &&
                 Globals.planets[2].Item3 == Globals.initialplanets[2].Item3 &&
-                Globals.planets[3].Item3 == Globals.initialplanets[3].Item3)  
+                Globals.planets[3].Item3 == Globals.initialplanets[3].Item3 &&
+                Globals.velocities[0].Item3 == 0 &&
+                Globals.velocities[1].Item3 == 0 &&
+                Globals.velocities[2].Item3 == 0 &&
+                Globals.velocities[3].Item3 == 0 &&
+                cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Z");
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
                         }   
-                zBackHome=true;                           
+                Globals.zBackHome=true;                           
             }
-            if (xBackHome==true && yBackHome == true && zBackHome == true)
+            if (Globals.xBackHome==true && Globals.yBackHome == true && Globals.zBackHome == true)
             {
                 return true;
             }
@@ -127,16 +141,16 @@ namespace Day_12
             // Globals.planets.Add((3,7,-4));
 
             //test input
-            Globals.planets.Add((-1,0,2));
-            Globals.planets.Add((2,-10,-7));
-            Globals.planets.Add((4,-8,8));
-            Globals.planets.Add((3,5,-1));
+            // Globals.planets.Add((-1,0,2));
+            // Globals.planets.Add((2,-10,-7));
+            // Globals.planets.Add((4,-8,8));
+            // Globals.planets.Add((3,5,-1));
 
             //test input 2
-            // Globals.planets.Add((-8,-10,0));
-            // Globals.planets.Add((5,5,10));
-            // Globals.planets.Add((2,-7,3));
-            // Globals.planets.Add((9,-8,-3));
+            Globals.planets.Add((-8,-10,0));
+            Globals.planets.Add((5,5,10));
+            Globals.planets.Add((2,-7,3));
+            Globals.planets.Add((9,-8,-3));
 
             Globals.initialplanets = Globals.planets.ToList();
             //initial speed =0
