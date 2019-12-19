@@ -15,10 +15,14 @@ namespace Day_12
             public static bool xBackHome = false;
             public static bool yBackHome = false;
             public static bool zBackHome = false;
+            public static int cycleX =0;
+            public static int cycleY =0;
+            public static int cycleZ =0;
+            
         }
         static void Main(string[] args)
         {
-            long NumberOfSteps = 50000;
+            long NumberOfSteps = 500000;
             InitPlanets();
 
             Console.WriteLine("Position and speed at start");
@@ -44,6 +48,8 @@ namespace Day_12
             //and do the final calculation of the situation
             int TotalEnergy = CalculateEnergy();
             Console.WriteLine("Final energy level is: "+ TotalEnergy);
+
+            Console.WriteLine("Final values to use for LCM calculation are: " + Globals.cycleX + " " +  Globals.cycleY+ " "+  Globals.cycleZ);
         }
 
         static int CalculateEnergy()
@@ -84,6 +90,7 @@ namespace Day_12
                 cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate X");
+                    if (Globals.xBackHome ==false){Globals.cycleX = (int)cycle + 1;}
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
@@ -102,6 +109,7 @@ namespace Day_12
                 cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Y");
+                    if (Globals.yBackHome ==false){Globals.cycleY = (int)cycle + 1;}
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
@@ -120,6 +128,7 @@ namespace Day_12
                 cycle > 0)  
             {
                     Console.WriteLine("During cycle " + cycle + " there was a return to starting position for coordinate Z");
+                    if (Globals.zBackHome ==false){Globals.cycleZ =(int) cycle + 1;}
                     for (int i=0; i<Globals.planets.Count;i++)
                         {
                             Console.WriteLine("Position of planet " + i + " is: " + Globals.planets[i] + " and velocities are" + Globals.velocities[i]);
@@ -135,10 +144,10 @@ namespace Day_12
         static void InitPlanets() //the puzzle input
         {
             //actuall input
-            // Globals.planets.Add((-10,-13,7));
-            // Globals.planets.Add((1,2,1));
-            // Globals.planets.Add((-15, -3, 13));
-            // Globals.planets.Add((3,7,-4));
+            Globals.planets.Add((-10,-13,7));
+            Globals.planets.Add((1,2,1));
+            Globals.planets.Add((-15, -3, 13));
+            Globals.planets.Add((3,7,-4));
 
             //test input
             // Globals.planets.Add((-1,0,2));
@@ -146,11 +155,11 @@ namespace Day_12
             // Globals.planets.Add((4,-8,8));
             // Globals.planets.Add((3,5,-1));
 
-            //test input 2
-            Globals.planets.Add((-8,-10,0));
-            Globals.planets.Add((5,5,10));
-            Globals.planets.Add((2,-7,3));
-            Globals.planets.Add((9,-8,-3));
+            // //test input 2
+            // Globals.planets.Add((-8,-10,0));
+            // Globals.planets.Add((5,5,10));
+            // Globals.planets.Add((2,-7,3));
+            // Globals.planets.Add((9,-8,-3));
 
             Globals.initialplanets = Globals.planets.ToList();
             //initial speed =0

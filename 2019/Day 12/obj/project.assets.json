@@ -8,32 +8,25 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\snappet\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\jarno\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj",
+      "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj",
       "projectName": "Day 12",
-      "projectPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\Day 12.csproj",
-      "packagesPath": "C:\\Users\\snappet\\.nuget\\packages\\",
-      "outputPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 12\\obj\\",
+      "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\Day 12.csproj",
+      "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
+      "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 12\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\snappet\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.0": {
@@ -58,24 +51,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.0.1, 3.0.1]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.0.1, 3.0.1]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[3.0.0, 3.0.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[3.0.0, 3.0.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
