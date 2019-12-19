@@ -1,32 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {}
+    "C:\\GitProjects\\AdventOfCode\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {}
   },
   "projects": {
-    "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {
+    "C:\\GitProjects\\AdventOfCode\\2019\\Day 13 winform\\day13viz\\day13viz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
+        "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
         "projectName": "day13viz",
-        "projectPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
-        "packagesPath": "C:\\Users\\snappet\\.nuget\\packages\\",
-        "outputPath": "F:\\Personal Repos\\AdventOfCode2019\\2019\\Day 13 winform\\day13viz\\obj\\",
+        "projectPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 13 winform\\day13viz\\day13viz.csproj",
+        "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
+        "outputPath": "C:\\GitProjects\\AdventOfCode\\2019\\Day 13 winform\\day13viz\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\snappet\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {

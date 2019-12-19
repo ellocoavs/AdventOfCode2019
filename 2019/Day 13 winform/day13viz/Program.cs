@@ -37,33 +37,83 @@ namespace RectanglesEx
 
         void OnPaint(object sender, PaintEventArgs e)
         {
-            int step =5;
-            int width = 5;
-            int height =5;
+            
 
             Graphics g = e.Graphics;
             
             //loop throuh matrix with values here
-            //g.Clear(SystemColors.Control); 
-            //g.FillRectangle(Brushes.Sienna, 10, 15, 90, 60);
-            // while (true){
-            //     for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
-            //     {
-            //         for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
-            //         {
-            //             if (Globals.grid[j,i]>0)  //MAKE INTO FUNCTION
-            //                 {
-            //                     //Console.WriteLine("Drawing something?");
-            //                     Pen pen = new Pen(Color.Red, 1);
-            //                     Rectangle rect = new Rectangle(new Point(step * j, step * i), new Size(width, height));
-            //                     g.DrawRectangle(pen, rect);
-            //                     g.FillRectangle(System.Drawing.Brushes.Red, rect);
+             
+            
+            while (true){
+                //g.Clear(SystemColors.Control);
+                for (int i=0; i<Globals.grid.GetUpperBound(1);i++)
+                {
+                    for (int j=0; j<Globals.grid.GetUpperBound(0);j++)
+                    {
+                        // if (Globals.grid[j,i]>0)  //MAKE INTO FUNCTION
+                        //     {
+                        //         //Console.WriteLine("Drawing something?");
+                        //         Pen pen = new Pen(Color.Red, 1);
+                        //         Rectangle rect = new Rectangle(new Point(step * j, step * i), new Size(width, height));
+                        //         g.DrawRectangle(pen, rect);
+                        //         g.FillRectangle(System.Drawing.Brushes.Red, rect);
                                 
-            //                 }
-            //         }
-            //     }
-            //     Thread.Sleep(100);
-            // }
+                        //     }
+                        int currentgridpoint = Globals.grid[j,i];
+                        DrawPoint(j,i,currentgridpoint,g);
+
+                    }
+                }
+                Thread.Sleep(100);
+            }
+        }
+
+        static void DrawPoint(int x,int y, int currentgridpoint, Graphics g)
+        {
+            int step = 5;
+            int width = 5;
+            int height =5;
+            // Pen pen;
+            // Brush brush;
+            switch (currentgridpoint)
+            {
+                case 1: //WALL (outside)
+                    Pen pen =  new Pen(Color.Gray, 1);
+                    Brush brush = System.Drawing.Brushes.Gray;
+                    Rectangle rect = new Rectangle(new Point(step * x, step * y), new Size(width, height));
+                    g.DrawRectangle(pen, rect);
+                    g.FillRectangle(brush, rect);
+                    break;
+                case 2: //BLOCK (breakable)
+                    pen = new Pen(Color.Red, 1);
+                    brush = System.Drawing.Brushes.Red;
+                    rect = new Rectangle(new Point(step * x, step * y), new Size(width, height));
+                    g.DrawRectangle(pen, rect);
+                    g.FillRectangle(brush, rect);
+                    break;
+                case 3: //PADDLE
+                    pen = new Pen(Color.Purple, 1);
+                    brush = System.Drawing.Brushes.Purple;
+                    rect = new Rectangle(new Point(step * x, step * y), new Size(width, height));
+                    g.DrawRectangle(pen, rect);
+                    g.FillRectangle(brush, rect);
+                    break;
+                case 4: //BALL
+                    pen = new Pen(Color.Yellow, 1);
+                    brush = System.Drawing.Brushes.Yellow;
+                    rect = new Rectangle(new Point(step * x, step * y), new Size(width, height));
+                    g.DrawRectangle(pen, rect);
+                    g.FillRectangle(brush, rect);
+                    break;
+                // default: //background color
+                //     pen = new Pen(Color.Black, 1);
+                //     brush = System.Drawing.Brushes.Black;
+                //     rect = new Rectangle(new Point(step * x, step * y), new Size(width, height));
+                //     g.DrawRectangle(pen, rect);
+                //     g.FillRectangle(brush, rect);
+                //     break;
+            }
+            
         }
 
         [STAThread]
@@ -81,7 +131,6 @@ namespace RectanglesEx
             }
 
             Task task0 = new Task( () => Compute(opcodes));
-            //Task task1 = new Task( () => DrawScreen());
             Task task2 = new Task( () => UpdateGrid());
             task2.Start();
             //task1.Start();
@@ -90,7 +139,7 @@ namespace RectanglesEx
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             //Task task3 = new Task( () => Application.Run(new Program()));
-            //Application.Run(new Program());
+            Application.Run(new Program());
 
           
             
@@ -115,11 +164,6 @@ namespace RectanglesEx
             //should be returning keyboard input at some points
             return 0;
         }
-            
-        static void DrawScreen()
-        {
-            //do some drawing logic based on our grid
-        }
 
         static void UpdateGrid() //maybe change Grid to List?
         {
@@ -139,6 +183,7 @@ namespace RectanglesEx
                     int id = Globals.outputs[0];
                     Globals.outputs.RemoveAt(0);
 
+                    //TODO HANDLE x = -1 and SKIP LE GRID but print LE SCORE
                     if (id > 4)//invalid id!
                     {
                         Console.WriteLine("Invalid id encountered by Grid. Stopping due to id: "+ id);

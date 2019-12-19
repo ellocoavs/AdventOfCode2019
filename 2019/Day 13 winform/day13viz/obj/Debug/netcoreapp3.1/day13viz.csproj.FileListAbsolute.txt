@@ -9,3 +9,14 @@ F:\Personal Repos\AdventOfCode2019\2019\Day 13 winform\day13viz\obj\Debug\netcor
 F:\Personal Repos\AdventOfCode2019\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.AssemblyInfo.cs
 F:\Personal Repos\AdventOfCode2019\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.dll
 F:\Personal Repos\AdventOfCode2019\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.pdb
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.exe
+C:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.deps.json
+C:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.runtimeconfig.json
+C:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.runtimeconfig.dev.json
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.dll
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\bin\Debug\netcoreapp3.1\day13viz.pdb
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.csprojAssemblyReference.cache
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.AssemblyInfoInputs.cache
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.AssemblyInfo.cs
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.dll
+c:\GitProjects\AdventOfCode\2019\Day 13 winform\day13viz\obj\Debug\netcoreapp3.1\day13viz.pdb
