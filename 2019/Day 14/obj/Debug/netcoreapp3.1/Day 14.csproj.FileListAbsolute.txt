@@ -1,0 +1,3 @@
+c:\GitProjects\AdventOfCode\2019\Day 14\obj\Debug\netcoreapp3.1\Day 14.csprojAssemblyReference.cache
+c:\GitProjects\AdventOfCode\2019\Day 14\obj\Debug\netcoreapp3.1\Day 14.AssemblyInfoInputs.cache
+c:\GitProjects\AdventOfCode\2019\Day 14\obj\Debug\netcoreapp3.1\Day 14.AssemblyInfo.cs
