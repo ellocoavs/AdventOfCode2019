@@ -15,13 +15,26 @@ namespace Day_14
 
             foreach (string rule in rules)
             {
-                var rightsideofrule = rule.Substring(rule.LastIndexOf("=>") + 1);
-                Console.WriteLine(rightsideofrule);
-                var leftsideofrule = rule.Substring(0, rule.LastIndexOf("=>"));
-                Console.WriteLine(leftsideofrule);
+                var rightsideofrule = rule.Substring(rule.LastIndexOf("=>") + 2);
+                outputchems.Add(Splitter(rightsideofrule));
                 
-                // inputchems.Add(leftsideofrule);
-                // outputchems.Add(rightsideofrule);
+                var leftsideofrule = rule.Substring(0, rule.LastIndexOf("=>"));
+                leftsideofrule.Trim();
+                string[] inters = leftsideofrule.Split(',');
+                (int,string)[] lefts = new (int,string)[100];
+                for (int i =0; i<inters.Length; i++)
+                {
+                    lefts[i] = Splitter(inters[i]);
+                }
+                inputchems.Add(lefts);
+            }
+
+            //some checks
+            bool check = (outputchems.Count) == inputchems.Count;
+            Console.WriteLine("Number of inputs matches number of outputs is: " +check);
+            for (int i=0; i<outputchems.Count; i++)
+            {
+                Console.WriteLine("input: "+string.Join("",inputchems[i]) + " => outputs: " + outputchems[i] );    
             }
 
             string fuel = "FUEL";
@@ -29,10 +42,17 @@ namespace Day_14
 
             
         }
-
-        static (int,string)[] FuelToOre (int count,string chemical)
+        static (int,string) Splitter (string input)
         {
-            return (0,"");//create rulepoin class with a count and name?
+            var trimmedInput =input.Trim();
+            string[] intermediate = trimmedInput.Split();
+            int amount =  int.Parse(intermediate[0]);
+            string name = intermediate[1];
+            return (amount,name);
+        }
+        static List<(int,string)> FuelToOre (int count,string chemical)
+        {
+            return new List<(int,string)>();//create rulepoin class with a count and name?
         }
     }
 }
