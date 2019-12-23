@@ -8,9 +8,9 @@ namespace Day_14
     {
         static void Main(string[] args)
         {
-            var rules = File.ReadAllLines("input.txt");
-            
-            List<(int,string)[]> inputchems = new List<(int,string)[]>();
+            //var rules = File.ReadAllLines("input.txt");
+            var rules = File.ReadAllLines("testinput1.txt");
+            List<List<(int,string)>> inputchems = new List<List<(int,string)>>();
             List<(int,string)> outputchems = new List<(int,string)>();
 
             foreach (string rule in rules)
@@ -21,10 +21,10 @@ namespace Day_14
                 var leftsideofrule = rule.Substring(0, rule.LastIndexOf("=>"));
                 leftsideofrule.Trim();
                 string[] inters = leftsideofrule.Split(',');
-                (int,string)[] lefts = new (int,string)[100];
+                List<(int,string)> lefts = new List<(int,string)>();
                 for (int i =0; i<inters.Length; i++)
                 {
-                    lefts[i] = Splitter(inters[i]);
+                    lefts.Add(Splitter(inters[i]));
                 }
                 inputchems.Add(lefts);
             }
@@ -37,9 +37,13 @@ namespace Day_14
                 Console.WriteLine("input: "+string.Join("",inputchems[i]) + " => outputs: " + outputchems[i] );    
             }
 
+
             string fuel = "FUEL";
             string ore = "ORE";
 
+            int answer =CalculateOreFromFuel((1,fuel),outputchems,inputchems);
+
+            Console.WriteLine("Result number of ore needed is: " + answer);
             
         }
         static (int,string) Splitter (string input)
@@ -50,9 +54,40 @@ namespace Day_14
             string name = intermediate[1];
             return (amount,name);
         }
+
+        static int CalculateOreFromFuel ((int,string) currentchem, List<(int,string)> outputchems, List<List<(int,string)>> inputchems)
+        {
+
+            int currentnumber = currentchem.Item1;
+            string currentname = currentchem.Item2;
+            Console.WriteLine("Processing: "+currentnumber+" of "+currentname);
+            if (currentname =="ORE")
+            {
+                return currentnumber;
+            }
+            else
+            {
+                int ruleIndex = 0; 
+                ruleIndex =  outputchems.FindIndex(a => a.Item2.Contains(currentname));
+                int result = 0;
+                foreach ((int,string)newchem in inputchems[ruleIndex])
+                {
+                    //wrong calculations
+                    //int numbertouse = (currentnumber/newchem.Item1) *outputchems[ruleIndex].Item1;
+                    //(newchem.Item1*currentnumber) / (currentnumber/outputchems[ruleIndex].Item1);
+
+                    int numbertouse = (currentnumber/(outputchems[ruleIndex].Item1)) * newchem.Item1;
+                    result += CalculateOreFromFuel((numbertouse,newchem.Item2),outputchems,inputchems);
+                }
+                return result;
+            }
+
+        }
+
+
         static List<(int,string)> FuelToOre (int count,string chemical)
         {
-            return new List<(int,string)>();//create rulepoin class with a count and name?
+            return new List<(int,string)>();
         }
     }
 }
