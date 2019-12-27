@@ -8,8 +8,8 @@ namespace Day_14
     {
         static void Main(string[] args)
         {
-            var rules = File.ReadAllLines("input.txt");
-            //var rules = File.ReadAllLines("testinput4.txt");
+            //var rules = File.ReadAllLines("input.txt");
+            var rules = File.ReadAllLines("testinput2.txt");
             List<List<(long,string)>> inputchems = new List<List<(long,string)>>();
             List<(long,string)> outputchems = new List<(long,string)>();
             List<List<(long,string)>> sortedinputchems = new List<List<(long,string)>>();
@@ -49,7 +49,7 @@ namespace Day_14
             string ore = "ORE";
 
             //int answer =CalculateOreFromFuel((1,fuel),outputchems,inputchems);
-            queue.Add((1,fuel));
+            queue.Add((82892753,fuel));
             long answer = CalcOreBFS(sortedoutputchems,sortedinputchems,visited, queue,leftovers);
             Console.WriteLine("Result number of ore needed is: " + answer);
             
