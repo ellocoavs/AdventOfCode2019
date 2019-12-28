@@ -8,8 +8,8 @@ namespace Day_14
     {
         static void Main(string[] args)
         {
-            //var rules = File.ReadAllLines("input.txt");
-            var rules = File.ReadAllLines("testinput2.txt");
+            var rules = File.ReadAllLines("input.txt");
+            //var rules = File.ReadAllLines("testinput2.txt");
             List<List<(long,string)>> inputchems = new List<List<(long,string)>>();
             List<(long,string)> outputchems = new List<(long,string)>();
             List<List<(long,string)>> sortedinputchems = new List<List<(long,string)>>();
@@ -36,23 +36,26 @@ namespace Day_14
 
             TopoSort((1,"FUEL"),outputchems,inputchems,sortedoutputchems,sortedinputchems);
             //some checks
-            bool check = (outputchems.Count) == inputchems.Count;
-            Console.WriteLine("Number of inputs matches number of outputs is: " +check);
-            for (int i=0; i<outputchems.Count; i++)
-            {
-                Console.WriteLine("input: "+string.Join("",inputchems[i]) + " => outputs: " + outputchems[i] );    
-                Console.WriteLine("Sorted input: "+string.Join("",sortedinputchems[i]) + " => outputs: " + sortedoutputchems[i] );    
-            }
+            // bool check = (outputchems.Count) == inputchems.Count;
+            // Console.WriteLine("Number of inputs matches number of outputs is: " +check);
+            // for (int i=0; i<outputchems.Count; i++)
+            // {
+            //     Console.WriteLine("input: "+string.Join("",inputchems[i]) + " => outputs: " + outputchems[i] );    
+            //     Console.WriteLine("Sorted input: "+string.Join("",sortedinputchems[i]) + " => outputs: " + sortedoutputchems[i] );    
+            // }
 
 
             string fuel = "FUEL";
             string ore = "ORE";
 
             //int answer =CalculateOreFromFuel((1,fuel),outputchems,inputchems);
-            queue.Add((82892753,fuel));
-            long answer = CalcOreBFS(sortedoutputchems,sortedinputchems,visited, queue,leftovers);
-            Console.WriteLine("Result number of ore needed is: " + answer);
+            //queue.Add((2102168,fuel));
+            //long answer = CalcOreBFS(sortedoutputchems,sortedinputchems,visited, queue,leftovers);
+            //Console.WriteLine("Result number of ore needed is: " + answer);
             
+            long answer = GetTrillionResult(1102168,2102168,1000000000000,sortedoutputchems,sortedinputchems,visited, queue,leftovers);
+            Console.WriteLine("Amount of fuel: " + answer);
+       
         }
         static (long,string) Splitter (string input)
         {
@@ -63,6 +66,39 @@ namespace Day_14
             return (amount,name);
         }
 
+        static long GetTrillionResult(long lowerbound, long upperbound, long requiredresult, List<(long,string)> outputchems, List<List<(long,string)>> inputchems, List<string> visited, List<(long,string)> queue, List<(long,string)> leftovers )
+        {
+            long result =0;
+            
+            long midwaypoint = Convert.ToInt64(Math.Ceiling( Convert.ToDecimal((upperbound+lowerbound)/2))); //bisect the two bound to narrow down optimally
+            Console.WriteLine("Calculated midwaypoint between "+  lowerbound + " and " + upperbound + " is " + midwaypoint);
+
+            queue.Add((midwaypoint,"FUEL")); //calculate result for midway point
+            long intermediate = CalcOreBFS(outputchems,inputchems,visited,queue,leftovers);
+            
+            Console.WriteLine("Midway point used for calculation");
+            Console.WriteLine(intermediate);
+            Console.WriteLine(requiredresult);
+            // resetting lists to be sure, need empty lists for next iteration
+            queue.Clear();
+            visited.Clear();
+            leftovers.Clear();
+
+            if (intermediate == requiredresult | (upperbound - lowerbound == 1)) //if the result is what we want, return the midwaypoint, that's what we calculated it with.
+            {
+                result = midwaypoint;
+            }
+            else if (intermediate < requiredresult)
+            {
+                result = GetTrillionResult(midwaypoint,upperbound,requiredresult, outputchems,inputchems, visited, queue,leftovers);
+            }
+            else if (intermediate > requiredresult)
+            {
+                result = GetTrillionResult(lowerbound,midwaypoint,requiredresult, outputchems,inputchems, visited, queue,leftovers);
+            }
+
+            return result;
+        }
 
         static void TopoSort ((long,string) startpoint,List<(long,string)> outputchems, List<List<(long,string)>> inputchems,List<(long,string)> sortedoutputchems, List<List<(long,string)>> sortedinputchems)
         {
@@ -91,7 +127,7 @@ namespace Day_14
             long OreCounter = 0;
             while (queue.Count > 0)
             {
-                Console.WriteLine("Top item in queue: " + queue[0]);
+                //Console.WriteLine("Top item in queue: " + queue[0]);
                 
                 //use a list as a queue, we need to be able to edit items inthe queue so no real queue datatype
                 var item = queue[0];
@@ -99,7 +135,7 @@ namespace Day_14
                 
                 if(item.Item2 == "ORE") //if we ended up at ore we can count numbers of ore...
                 {
-                    Console.WriteLine("Ore found, adding "+ item.Item1 + " ore to total orecount of: " + OreCounter);
+                   // Console.WriteLine("Ore found, adding "+ item.Item1 + " ore to total orecount of: " + OreCounter);
                     OreCounter += item.Item1;
                 }
                 else
@@ -117,7 +153,7 @@ namespace Day_14
                         if (leftoverindex > -1) //we found leftovers!
                         {
                             //calculate amount of item we need, reduce by leftovers, remove from leftovers
-                            Console.WriteLine("We found some leftovers to reuse for: " + leftovers[leftoverindex].Item2 + ", amount: " +leftovers[leftoverindex].Item1);
+                           // Console.WriteLine("We found some leftovers to reuse for: " + leftovers[leftoverindex].Item2 + ", amount: " +leftovers[leftoverindex].Item1);
                             numbertouse =(long)(Math.Ceiling((decimal)item.Item1/(outputchems[ruleIndex].Item1))) * newchem.Item1 - leftovers[leftoverindex].Item1;
                             leftovers.RemoveAt(leftoverindex);
                             leftoverindex =-1;
@@ -133,7 +169,7 @@ namespace Day_14
                         long leftovernewchem = ((numbertouse / newchem.Item1) * outputchems[ruleIndex].Item1)  - item.Item1;
                         if (leftovernewchem > 0 && leftoversproduced == false)
                         {
-                            Console.WriteLine("We are going to have some leftovers from this reaction: " +leftovernewchem +" , "+ item.Item2);
+                            //Console.WriteLine("We are going to have some leftovers from this reaction: " +leftovernewchem +" , "+ item.Item2);
                             leftovers.Add((leftovernewchem,item.Item2));
                             leftoversproduced = true;
                         }
@@ -143,20 +179,20 @@ namespace Day_14
                         int newchemleftoversindex = leftovers.FindIndex( b => b.Item2.Equals(newchem.Item2));
                         if (newchemleftoversindex > -1)
                         {
-                            Console.WriteLine("Leftovers found to use up for child! " + newchem.Item2 + " in the amount of " + leftovers[newchemleftoversindex].Item1 + ", reducing required amount by this.");
+                            //Console.WriteLine("Leftovers found to use up for child! " + newchem.Item2 + " in the amount of " + leftovers[newchemleftoversindex].Item1 + ", reducing required amount by this.");
                             numbertouse -=leftovers[newchemleftoversindex].Item1;
                             leftovers.RemoveAt(newchemleftoversindex);
                         }
                         //if not in queue yet add as new with calculated amount
                         if (foundinqueueindex== -1)
                         {
-                            Console.WriteLine("Not found, adding to queue: "+numbertouse +" of item " +newchem.Item2);
+                           // Console.WriteLine("Not found, adding to queue: "+numbertouse +" of item " +newchem.Item2);
                             queue.Add((numbertouse,newchem.Item2));
                         }
                         //if in queue, add calculated amount to existing
                         else
                         {
-                            Console.WriteLine("Found at: "+ foundinqueueindex + " Adding amount to currently queued chem: "+numbertouse + " " + newchem.Item2);
+                            //Console.WriteLine("Found at: "+ foundinqueueindex + " Adding amount to currently queued chem: "+numbertouse + " " + newchem.Item2);
                             queue[foundinqueueindex] = (numbertouse+queue[foundinqueueindex].Item1, newchem.Item2);
                         }
                     }
