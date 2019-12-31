@@ -16,6 +16,7 @@ namespace Day_15
 
             public static int[,] map = new int[500,500];
             public static int infinity = 99999;
+            public static int wall = 9999999;
             public enum directions
             {
                 north,
@@ -27,6 +28,7 @@ namespace Day_15
             public static List<int> outputs = new List<int>();
             public static Queue<int> inputs = new Queue<int>();
             public static List<(int,int)> visited = new List<(int,int)>();
+            public static List<(int,int)> neighbours = new List<(int,int)>();
             public static bool robotStop;
         }
         static void Main(string[] args)
@@ -97,11 +99,40 @@ namespace Day_15
         {
             while (true)
             {
-            //mark all neighbours as current + 1, except if already lower?
-            //then try to visit.  if wall- > inifnity + visited, else update value?
+                ListNeighbours();//make a list of neighbours to iterate over
+                int currentdistance = Globals.map[Globals.currentposition.Item1,Globals.currentposition.Item2];
+                
+                foreach ((int,int)neighbour in Globals.neighbours)
+                {   //mark all neighbours as current + 1, except if already lower?
+                    if (currentdistance+1 < Globals.map[neighbour.Item1,neighbour.Item2] && Globals.map[neighbour.Item1,neighbour.Item2] != Globals.wall)
+                    {
+                        Globals.map[neighbour.Item1,neighbour.Item2] = currentdistance+1;
+                    }
+                }
+            
+            //then try to visit.  if wall- > inifnity + visited, else update value? 
             //give instruction (start north at first attemp?) ? create move method?
             //await feedback ? create feedback wait/grab method
             //do next intstruction ? calculate next option here.
+            }
+        }
+        static void ListNeighbours()
+        {
+            if (!Globals.visited.Contains((Globals.currentposition.Item1+1,Globals.currentposition.Item2)))
+            {
+                Globals.neighbours.Add((Globals.currentposition.Item1+1,Globals.currentposition.Item2));
+            }
+            if (!Globals.visited.Contains((Globals.currentposition.Item1-1,Globals.currentposition.Item2)))
+            {
+                Globals.neighbours.Add((Globals.currentposition.Item1-1,Globals.currentposition.Item2));
+            }
+            if (!Globals.visited.Contains((Globals.currentposition.Item1,Globals.currentposition.Item2+1)))
+            {
+                Globals.neighbours.Add((Globals.currentposition.Item1,Globals.currentposition.Item2+1));
+            }
+            if (!Globals.visited.Contains((Globals.currentposition.Item1,Globals.currentposition.Item2-1)))
+            {
+                Globals.neighbours.Add((Globals.currentposition.Item1,Globals.currentposition.Item2-1));
             }
         }
         static void RobotMoves()  //This loops grabs input, paints, turns and moves. uses step integer to know if it's on a painting instruction or not
