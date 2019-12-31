@@ -18,14 +18,15 @@ namespace Day_15
             public static int infinity = 99999;
             public enum directions
             {
-                up,
-                down,
-                left,
-                right
+                north,
+                south,
+                west,
+                east
             }
-            public static directions direction = Globals.directions.up;
             public static (int,int) currentposition = (250,250);
             public static List<int> outputs = new List<int>();
+            public static Queue<int> inputs = new Queue<int>();
+            public static List<(int,int)> visited = new List<(int,int)>();
             public static bool robotStop;
         }
         static void Main(string[] args)
@@ -90,6 +91,18 @@ namespace Day_15
                 Console.WriteLine("");
             }
             Console.WriteLine("");
+        }
+
+        static async void RobotDijkstraAsync()
+        {
+            while (true)
+            {
+            //mark all neighbours as current + 1, except if already lower?
+            //then try to visit.  if wall- > inifnity + visited, else update value?
+            //give instruction (start north at first attemp?) ? create move method?
+            //await feedback ? create feedback wait/grab method
+            //do next intstruction ? calculate next option here.
+            }
         }
         static void RobotMoves()  //This loops grabs input, paints, turns and moves. uses step integer to know if it's on a painting instruction or not
         {
@@ -193,7 +206,7 @@ namespace Day_15
         static int GetInput() //grabs value from current position of robot and returns
         {
             //Console.WriteLine("Grabbing input from robot camera into brain/opcode processor.");
-            int input = Globals.map[Globals.currentposition.Item1,Globals.currentposition.Item2];
+            int input = Globals.inputs.Dequeue();
             Console.WriteLine("Input grabbed was: "+input );
             return input;
         }
@@ -201,7 +214,7 @@ namespace Day_15
         static void DoOutput(long parameter)  //outputs parameter to the queue for the robot
         {
             //Console.WriteLine("About to output parameter " + parameter + " to robot");
-            if (parameter == 1 | parameter == 0  | parameter == 99)
+            if (parameter == 1 | parameter == 0  | parameter == 2)
             {
                 Globals.outputs.Add((int)parameter);
               //  Console.WriteLine("Output succesful.");
