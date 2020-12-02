@@ -23,11 +23,14 @@ namespace Day_2
                 int max = Int32.Parse(numbers[1]);
                 string password =parts[1].Trim();
                 
+                /*
                 int count = password.Count(f => f == letter);
                 Console.WriteLine(count);
-                if (count >= min && count <=max)
+                */
+                if (password[(min-1)] == letter ^ password[(max-1)] == letter)
                 {
                     validpasswords++;
+                    Console.WriteLine("Valid password found. Total is now: " + validpasswords);
                 }
             }
             Console.WriteLine("Number of valid passwords is: " + validpasswords);
