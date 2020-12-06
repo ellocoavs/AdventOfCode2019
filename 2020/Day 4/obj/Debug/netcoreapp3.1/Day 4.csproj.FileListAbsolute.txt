@@ -11,3 +11,16 @@ C:\Users\Jarno.Zwaaneveld\Desktop\Advent Repo\AdventOfCode2019\2020\Day 4\obj\De
 C:\Users\Jarno.Zwaaneveld\Desktop\Advent Repo\AdventOfCode2019\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.dll
 C:\Users\Jarno.Zwaaneveld\Desktop\Advent Repo\AdventOfCode2019\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.pdb
 C:\Users\Jarno.Zwaaneveld\Desktop\Advent Repo\AdventOfCode2019\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.genruntimeconfig.cache
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.csprojAssemblyReference.cache
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.AssemblyInfoInputs.cache
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.AssemblyInfo.cs
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.csproj.CoreCompileInputs.cache
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.dll
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.pdb
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.exe
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.deps.json
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.runtimeconfig.json
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.runtimeconfig.dev.json
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.dll
+C:\GitProjects\AdventOfCode\2020\Day 4\bin\Debug\netcoreapp3.1\Day 4.pdb
+C:\GitProjects\AdventOfCode\2020\Day 4\obj\Debug\netcoreapp3.1\Day 4.genruntimeconfig.cache

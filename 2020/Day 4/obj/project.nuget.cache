@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BzzhaFmHh7LBJ3CMVFq8/x5X1eJLyionys1xiPD584a57JR6pkmTpSSRW72eDGW3v4oMvT64DLoW6hqApz2Uaw==",
+  "dgSpecHash": "9nsA1izZ9x7TMfWqhMzGGoFMEaFmF0Dqm25v3fNo/UAvtUpC6GyGIw6Y9g/gQFhtcRaAdG7juym3YCXHp3gagw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jarno.Zwaaneveld\\Desktop\\Advent Repo\\AdventOfCode2019\\2020\\Day 4\\Day 4.csproj",
+  "projectFilePath": "C:\\GitProjects\\AdventOfCode\\2020\\Day 4\\Day 4.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

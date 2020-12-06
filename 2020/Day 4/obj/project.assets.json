@@ -8,25 +8,23 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\Jarno.Zwaaneveld\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\jarno\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jarno.Zwaaneveld\\Desktop\\Advent Repo\\AdventOfCode2019\\2020\\Day 4\\Day 4.csproj",
+      "projectUniqueName": "C:\\GitProjects\\AdventOfCode\\2020\\Day 4\\Day 4.csproj",
       "projectName": "Day 4",
-      "projectPath": "C:\\Users\\Jarno.Zwaaneveld\\Desktop\\Advent Repo\\AdventOfCode2019\\2020\\Day 4\\Day 4.csproj",
-      "packagesPath": "C:\\Users\\Jarno.Zwaaneveld\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jarno.Zwaaneveld\\Desktop\\Advent Repo\\AdventOfCode2019\\2020\\Day 4\\obj\\",
+      "projectPath": "C:\\GitProjects\\AdventOfCode\\2020\\Day 4\\Day 4.csproj",
+      "packagesPath": "C:\\Users\\jarno\\.nuget\\packages\\",
+      "outputPath": "C:\\GitProjects\\AdventOfCode\\2020\\Day 4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Jarno.Zwaaneveld\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jarno\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -35,8 +33,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://snappet.pkgs.visualstudio.com/_packaging/Snappet/nuget/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
