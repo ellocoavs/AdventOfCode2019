@@ -150,15 +150,49 @@ namespace Day_4
                 if (field =="hgt")
                 {
                     int index = passport.IndexOf(field);
+                    Console.WriteLine("Index of field is: " + index);
                     int spaceindex = passport.IndexOf(" ",index);
+                    Console.WriteLine("Are we at the last field of the passport, then -1 : " + spaceindex);
                     if (spaceindex == -1)
                     {
                         //last field of passport, no space afterwards, so check for stuffs in safe way
                         int length = passport.Substring(index).Length;
                         Console.WriteLine("There are " + length + " characters till end of passport");
-
+                        Console.WriteLine(passport.Substring(index+length-2, 2) + " found");
+                        if ( passport.Substring(index+length-2, 2) == "cm")
+                        {
+                            Console.WriteLine("CM detected, checking values");
+                            if (passport.Substring(index+length-5, 3).All(char.IsDigit)) //three digits?
+                            {
+                                int height = int.Parse(passport.Substring(index+length-5, 3));
+                                if (!(height >= 150 && height <= 193))
+                                {
+                                    return false;
+                                }
+                                else 
+                                {
+                                    validFields++;
+                                }
+                            }
+                        }
+                        else if ( passport.Substring(index+length-2, 2) == "in")
+                        {
+                             Console.WriteLine("INCH detected, checking values");
+                            if (passport.Substring(index+length-5, 3).All(char.IsDigit)) //three digits?
+                            {
+                                int height = int.Parse(passport.Substring(index+length-5, 3));
+                                if (!(height >= 59 && height <= 76))
+                                {
+                                    return false;
+                                }
+                                else 
+                                {
+                                    validFields++;
+                                }
+                            }
+                        }
                     }
-                    if ( passport.Substring(spaceindex-2, 2) == "cm")
+                    else if ( passport.Substring(spaceindex-2, 2) == "cm")
                     {
                         //check for 3 numbers between 150 and 193
                         if (passport.Substring(spaceindex-5, 3).All(char.IsDigit)) //three digits?
