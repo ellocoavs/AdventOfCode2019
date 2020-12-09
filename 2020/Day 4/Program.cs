@@ -61,16 +61,46 @@ namespace Day_4
                         //last field of passport, no space afterwards, so check for stuffs in safe way
                         int length = passport.Substring(index).Length;
                         Console.WriteLine("There are " + length + " characters till end of passport");
-                         int year1 = int.Parse( passport.Substring(index+length-4, 4));
-                        if (!(year1 >= 1920 && year1 <= 2002))
+                        Console.WriteLine("Trying to parse year from: " + passport.Substring(index+length-4, 4));
+                        if (length <= 8)
                         {
-                            Console.WriteLine("Invalid passport: " + passport );
-                            Console.WriteLine("Problem in required field: " + field);
-                            return false; //not in valid date range
+                            int year1 = int.Parse( passport.Substring(index+length-4, 4));
+                            if (!(year1 >= 1920 && year1 <= 2002))
+                            {
+                                Console.WriteLine("Invalid passport: " + passport );
+                                Console.WriteLine("Problem in required field: " + field);
+                                return false; //not in valid date range
+                            }
+                            else 
+                            {
+                                validFields++;
+                            }
                         }
-                        else 
+                        else
                         {
-                            validFields++;
+                            if (! (passport[index+8] == ' ' || passport[index+8].ToString() == Environment.NewLine))
+                    {
+                        Console.WriteLine("Index of space after field is: "+ spaceindex);
+                        Console.WriteLine("Index+8 is" + passport[index+8]);
+                        Console.WriteLine("Field was malformed!");
+                        Console.WriteLine("Invalid passport: " + passport );
+                        Console.WriteLine("Problem in required field: " + field);
+                        return false; //field was malformed
+                    }
+                    
+                    Console.WriteLine("Checking year value correctness");
+                    int year2 = int.Parse(passport.Substring(index+4,4)); //second argument =4 because years are 4 characters
+                    Console.WriteLine("Year is:" + year2);
+                    if (!(year2 >= 1920 && year2 <= 2002))
+                    {
+                        Console.WriteLine("Invalid passport: " + passport );
+                        Console.WriteLine("Problem in required field: " + field);
+                        return false; //not in valid date range
+                    }
+                    else 
+                    {
+                        validFields++;
+                    }
                         }
                     }
                     else if (! (passport[index+8] == ' ' || passport[index+8].ToString() == Environment.NewLine))
@@ -98,17 +128,58 @@ namespace Day_4
                     }
                 }
 
+                
                 if (field =="iyr")
                 {
                     int index = passport.IndexOf(field);
-                    Console.WriteLine("Checking iyr index + 8 chars being a space. Index is:" + index);
+                    Console.WriteLine("Checking byr index + 8 chars being a space. Index is:" + index);
                     int spaceindex = passport.IndexOf(" ",index);
                     if (spaceindex == -1)
                     {
                         //last field of passport, no space afterwards, so check for stuffs in safe way
                         int length = passport.Substring(index).Length;
                         Console.WriteLine("There are " + length + " characters till end of passport");
-
+                        Console.WriteLine("Trying to parse year from: " + passport.Substring(index+length-4, 4));
+                        if (length <= 8)
+                        {
+                            int year1 = int.Parse( passport.Substring(index+length-4, 4));
+                            if (!(year1 >= 2010 && year1 <= 2020))
+                            {
+                                Console.WriteLine("Invalid passport: " + passport );
+                                Console.WriteLine("Problem in required field: " + field);
+                                return false; //not in valid date range
+                            }
+                            else 
+                            {
+                                validFields++;
+                            }
+                        }
+                        else
+                        {
+                            if (! (passport[index+8] == ' ' || passport[index+8].ToString() == Environment.NewLine))
+                    {
+                        Console.WriteLine("Index of space after field is: "+ spaceindex);
+                        Console.WriteLine("Index+8 is" + passport[index+8]);
+                        Console.WriteLine("Field was malformed!");
+                        Console.WriteLine("Invalid passport: " + passport );
+                        Console.WriteLine("Problem in required field: " + field);
+                        return false; //field was malformed
+                    }
+                    
+                    Console.WriteLine("Checking year value correctness");
+                    int year2 = int.Parse(passport.Substring(index+4,4)); //second argument =4 because years are 4 characters
+                    Console.WriteLine("Year is:" + year2);
+                    if (!(year2 >= 2010 && year2 <= 2020))
+                    {
+                        Console.WriteLine("Invalid passport: " + passport );
+                        Console.WriteLine("Problem in required field: " + field);
+                        return false; //not in valid date range
+                    }
+                    else 
+                    {
+                        validFields++;
+                    }
+                        }
                     }
                     else if (! (passport[index+8] == ' ' || passport[index+8].ToString() == Environment.NewLine))
                     {
@@ -135,36 +206,64 @@ namespace Day_4
                     }
                 }
 
+
                 if (field =="eyr")
                 {
                     int index = passport.IndexOf(field);
-                    Console.WriteLine("Checking eyr index + 8 chars being a space. Index is:" + index);
+                    Console.WriteLine("Checking byr index + 8 chars being a space. Index is:" + index);
                     int spaceindex = passport.IndexOf(" ",index);
                     if (spaceindex == -1)
                     {
                         //last field of passport, no space afterwards, so check for stuffs in safe way
                         int length = passport.Substring(index).Length;
                         Console.WriteLine("There are " + length + " characters till end of passport");
-                        //MISSING CODE MORON. TODO
-                        int year1 = int.Parse( passport.Substring(index+length-4, 4));
-                        if (!(year1 >= 2020 && year1 <= 2030))
+                        Console.WriteLine("Trying to parse year from: " + passport.Substring(index+length-4, 4));
+                        if (length <= 8)
                         {
-                        Console.WriteLine("Invalid passport: " + passport );
-                        Console.WriteLine("Problem in required field: " + field);
-                        return false; //not in valid date range
+                            int year1 = int.Parse( passport.Substring(index+length-4, 4));
+                            if (!(year1 >= 2020 && year1 <= 2030))
+                            {
+                                Console.WriteLine("Invalid passport: " + passport );
+                                Console.WriteLine("Problem in required field: " + field);
+                                return false; //not in valid date range
+                            }
+                            else 
+                            {
+                                validFields++;
+                            }
                         }
-                        else 
+                        else
                         {
-                            validFields++;
+                            if (! (passport[index+8] == ' ' || passport[index+8] == '\r'))
+                            {
+                                Console.WriteLine("Index of space after field is: "+ spaceindex);
+                                Console.WriteLine("Index+8 is" + passport[index+8]);
+                                Console.WriteLine("Field was malformed!");
+                                Console.WriteLine("Invalid passport: " + passport );
+                                Console.WriteLine("Problem in required field: " + field);
+                                return false; //field was malformed
+                            }
+                    
+                            Console.WriteLine("Checking year value correctness");
+                            int year2 = int.Parse(passport.Substring(index+4,4)); //second argument =4 because years are 4 characters
+                            Console.WriteLine("Year is:" + year2);
+                            if (!(year2 >= 2020 && year2 <= 2030))
+                            {
+                                Console.WriteLine("Invalid passport: " + passport );
+                                Console.WriteLine("Problem in required field: " + field);
+                                return false; //not in valid date range
+                            }
+                            else 
+                            {
+                                validFields++;
+                            }
                         }
-
-
-
                     }
-                    else if (! (passport[index+8] == ' ' || passport[index+8].ToString() == Environment.NewLine))
+                    else if (! (passport[index+8] == ' ' || passport[index+8] == '\r'))
                     {
                         Console.WriteLine("Index of space after field is: "+ spaceindex);
                         Console.WriteLine("Index+8 is" + passport[index+8]);
+                        Console.WriteLine("Unicode value is: " + (int)passport[index+8]);
                         Console.WriteLine("Field was malformed!");
                         Console.WriteLine("Invalid passport: " + passport );
                         Console.WriteLine("Problem in required field: " + field);
@@ -185,6 +284,7 @@ namespace Day_4
                         validFields++;
                     }
                 }
+
                 
                 if (field =="hgt")
                 {
@@ -379,7 +479,7 @@ namespace Day_4
             }
             else
             {
-                Console.WriteLine("Invalid passport: " + passport );
+                Console.WriteLine("Invalid passport due to missing field: " + passport );
                 return false; //some field was missing?
             }
         }
